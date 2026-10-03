@@ -1,0 +1,38 @@
+[
+  {
+    "id": "maret",
+    "periode": "Maret",
+    "isLocked": true,
+    "lockedAt": "2026-10-03T03:16:56.349Z",
+    "previousPeriodId": "juni_2026",
+    "previousPeriodName": "Juni 2026",
+    "totalPegawai": 26,
+    "totalKehadiran": 26,
+    "totalMnt": 7683,
+    "avgSkor": 96.19
+  },
+  {
+    "id": "juni_2026",
+    "periode": "Juni 2026",
+    "isLocked": true,
+    "lockedAt": "2026-06-30T17:00:00.000Z",
+    "previousPeriodId": "mei_2026",
+    "previousPeriodName": "Mei 2026",
+    "totalPegawai": 33,
+    "totalKehadiran": 28,
+    "totalMnt": 3717,
+    "avgSkor": 71.38
+  },
+  {
+    "id": "agustus_2026",
+    "periode": "Agustus 2026",
+    "isLocked": true,
+    "lockedAt": "2026-08-31T17:00:00.000Z",
+    "previousPeriodId": "juli_2026",
+    "previousPeriodName": "Juli 2026",
+    "totalPegawai": 33,
+    "totalKehadiran": 27,
+    "totalMnt": 5289,
+    "avgSkor": 61.09
+  }
+]

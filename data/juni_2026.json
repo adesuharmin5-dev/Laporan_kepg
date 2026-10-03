@@ -1,0 +1,59 @@
+{
+  "periode": "Juni 2026",
+  "bulanLaluName": "Mei 2026",
+  "totalPegawaiHeader": 33,
+  "demographics": {
+    "status": [
+      { "label": "Direktur", "count": 1, "pct": 3.03 },
+      { "label": "Manager", "count": 2, "pct": 6.06 },
+      { "label": "Karyawan Tetap", "count": 11, "pct": 33.33 },
+      { "label": "Karyawan Kontrak", "count": 17, "pct": 51.52 },
+      { "label": "Probation", "count": 2, "pct": 6.06 }
+    ],
+    "gender": [
+      { "label": "Laki Laki", "count": 31, "pct": 93.94 },
+      { "label": "Perempuan", "count": 2, "pct": 6.06 }
+    ],
+    "education": [
+      { "label": "SMK/SMA", "count": 17, "pct": 51.52 },
+      { "label": "D3", "count": 5, "pct": 15.15 },
+      { "label": "S1", "count": 11, "pct": 33.33 }
+    ],
+    "position": [
+      { "label": "Direktur", "count": 1, "pct": 3.03 },
+      { "label": "Manager", "count": 2, "pct": 6.06 },
+      { "label": "LEAD", "count": 4, "pct": 12.12 },
+      { "label": "STAF", "count": 26, "pct": 78.79 }
+    ]
+  },
+  "attendance": [
+    { "no": 1, "name": "A. Gymnastiar", "mntCurrent": 530, "mntLast": 579, "deltaMnt": 49, "hariCurrent": 12, "hariLast": 13, "deltaHari": 1, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 26.0 },
+    { "no": 2, "name": "Ade Mursidin", "mntCurrent": 18, "mntLast": 162, "deltaMnt": 144, "hariCurrent": 2, "hariLast": 4, "deltaHari": 2, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 92.1 },
+    { "no": 3, "name": "Ade Suharmin", "mntCurrent": 242, "mntLast": 192, "deltaMnt": -50, "hariCurrent": 14, "hariLast": 14, "deltaHari": 0, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 35.68 },
+    { "no": 4, "name": "Dicky Nursalim", "mntCurrent": 128, "mntLast": 52, "deltaMnt": -76, "hariCurrent": 12, "hariLast": 9, "deltaHari": -3, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 51.04 },
+    { "no": 5, "name": "Fahmi Sabila Dinnulhaq", "mntCurrent": 16, "mntLast": 3, "deltaMnt": -13, "hariCurrent": 2, "hariLast": 0, "deltaHari": -2, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 92.26 },
+    { "no": 6, "name": "Fajar Anugerah Iskandar", "mntCurrent": 1, "mntLast": 0, "deltaMnt": -1, "hariCurrent": 0, "hariLast": 0, "deltaHari": 0, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 99.92 },
+    { "no": 7, "name": "Fajar Dwi Mardiansyah", "mntCurrent": 4, "mntLast": 27, "deltaMnt": 23, "hariCurrent": 1, "hariLast": 4, "deltaHari": 3, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 96.44 },
+    { "no": 8, "name": "Fayzal Febriansyah", "mntCurrent": 116, "mntLast": 169, "deltaMnt": 53, "hariCurrent": 1, "hariLast": 13, "deltaHari": 12, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 87.73 },
+    { "no": 9, "name": "Febrie Zaeni Muchtar", "mntCurrent": 33, "mntLast": 26, "deltaMnt": -7, "hariCurrent": 4, "hariLast": 3, "deltaHari": -1, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 84.43 },
+    { "no": 10, "name": "Ferddy Fauzan Ramadhan", "mntCurrent": 112, "mntLast": 296, "deltaMnt": 184, "hariCurrent": 4, "hariLast": 15, "deltaHari": 11, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 78.29 },
+    { "no": 11, "name": "Hari Heryadi", "mntCurrent": 99, "mntLast": 192, "deltaMnt": 93, "hariCurrent": 4, "hariLast": 11, "deltaHari": 7, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 79.3 },
+    { "no": 12, "name": "Hadiyan Nurdyana", "mntCurrent": 346, "mntLast": 0, "deltaMnt": -346, "hariCurrent": 7, "hariLast": 0, "deltaHari": -7, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 50.34 },
+    { "no": 13, "name": "Heri Hermawan", "mntCurrent": 145, "mntLast": 66, "deltaMnt": -79, "hariCurrent": 5, "hariLast": 4, "deltaHari": -1, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 72.47 },
+    { "no": 14, "name": "Ikbal Dwipayana Romli", "mntCurrent": 289, "mntLast": 830, "deltaMnt": 541, "hariCurrent": 5, "hariLast": 15, "deltaHari": 10, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 61.27 },
+    { "no": 15, "name": "Luthfi Fadle Rynaldy", "mntCurrent": 64, "mntLast": 95, "deltaMnt": 31, "hariCurrent": 9, "hariLast": 8, "deltaHari": -1, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 65.77 },
+    { "no": 16, "name": "Masrizki Muzakki", "mntCurrent": 141, "mntLast": 87, "deltaMnt": -54, "hariCurrent": 6, "hariLast": 7, "deltaHari": 1, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 69.51 },
+    { "no": 17, "name": "Mira Nur Asyifa", "mntCurrent": 0, "mntLast": 23, "deltaMnt": 23, "hariCurrent": 0, "hariLast": 0, "deltaHari": 0, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 100.0 },
+    { "no": 18, "name": "Muhammad Husni Zarkasyi", "mntCurrent": 16, "mntLast": 23, "deltaMnt": 7, "hariCurrent": 2, "hariLast": 2, "deltaHari": 0, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 92.26 },
+    { "no": 19, "name": "Muhammad Kautsar Alifan Mudzakir", "mntCurrent": 91, "mntLast": 48, "deltaMnt": -43, "hariCurrent": 9, "hariLast": 3, "deltaHari": -6, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 63.67 },
+    { "no": 20, "name": "Muhammad Zena Firdaus", "mntCurrent": 0, "mntLast": 74, "deltaMnt": 74, "hariCurrent": 0, "hariLast": 3, "deltaHari": 3, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 100.0 },
+    { "no": 21, "name": "Nizar Muharam", "mntCurrent": 289, "mntLast": 754, "deltaMnt": 465, "hariCurrent": 9, "hariLast": 15, "deltaHari": 6, "izin": 1, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 46.27 },
+    { "no": 22, "name": "Ramdani Pratama Saepudin", "mntCurrent": 244, "mntLast": 326, "deltaMnt": 82, "hariCurrent": 11, "hariLast": 15, "deltaHari": 4, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 45.27 },
+    { "no": 23, "name": "Rifqi rabbani", "mntCurrent": 1, "mntLast": 3, "deltaMnt": 2, "hariCurrent": 0, "hariLast": 4, "deltaHari": 4, "izin": 0, "sakit": 3, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 99.92 },
+    { "no": 24, "name": "Rivaldo Valentino", "mntCurrent": 0, "mntLast": 0, "deltaMnt": 0, "hariCurrent": 0, "hariLast": 0, "deltaHari": 0, "izin": 0, "sakit": 0, "sakitTS": 2, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 100.0 },
+    { "no": 25, "name": "Rizky Agestyas Athallah", "mntCurrent": 98, "mntLast": 29, "deltaMnt": -69, "hariCurrent": 6, "hariLast": 5, "deltaHari": -1, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 72.88 },
+    { "no": 26, "name": "Suci Rahmah", "mntCurrent": 95, "mntLast": 33, "deltaMnt": -62, "hariCurrent": 9, "hariLast": 4, "deltaHari": -5, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 63.36 },
+    { "no": 27, "name": "Taufik Dika Permana", "mntCurrent": 455, "mntLast": 284, "deltaMnt": -171, "hariCurrent": 15, "hariLast": 16, "deltaHari": 1, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 16.25 },
+    { "no": 28, "name": "Yudith Fabillah Arsy Pratama", "mntCurrent": 144, "mntLast": 132, "deltaMnt": -12, "hariCurrent": 10, "hariLast": 8, "deltaHari": -2, "izin": 0, "sakit": 0, "sakitTS": 0, "alfa": 0, "cuti": 0, "wfh": 0, "skor": 56.3 }
+  ]
+}

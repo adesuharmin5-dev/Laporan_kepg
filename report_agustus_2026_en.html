@@ -1,0 +1,1923 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EMPLOYEE & ATTENDANCE REPORT - Agustus 2026</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: #0b1320;
+      color: #1e293b;
+      margin: 0;
+      padding: 0;
+    }
+    .slide-page {
+      width: 1280px;
+      height: 720px;
+      margin: 20px auto;
+      background: #f8fafc;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      page-break-after: always;
+    }
+    @media print {
+      body {
+        background: transparent;
+        margin: 0;
+      }
+      .slide-page {
+        margin: 0;
+        box-shadow: none;
+        width: 100vw;
+        height: 100vh;
+        page-break-after: always;
+      }
+      .no-print {
+        display: none !important;
+      }
+    }
+    .custom-bar-track {
+      background: #e2e8f0;
+      height: 14px;
+      border-radius: 9999px;
+      overflow: hidden;
+      display: flex;
+    }
+    .custom-bar-fill {
+      height: 100%;
+      border-radius: 9999px;
+      transition: width 0.3s ease;
+    }
+  </style>
+</head>
+<body class="py-6">
+
+  <!-- ==================== PAGE 1: EXECUTIVE MANAGEMENT REPORT ==================== -->
+  <div class="slide-page">
+    <!-- Header -->
+    <div class="bg-[#0f1e36] text-white px-8 py-3.5 flex justify-between items-center shrink-0">
+      <div>
+        <div class="text-[11px] font-bold tracking-wider text-slate-300 uppercase">EXECUTIVE MANAGEMENT REPORT</div>
+        <h1 class="text-xl font-extrabold tracking-tight">EMPLOYEE & ATTENDANCE REPORT</h1>
+      </div>
+      <div class="text-xs font-semibold text-slate-300">
+        Periode Agustus 2026
+      </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="p-6 flex-1 flex flex-col justify-between overflow-hidden">
+      <!-- 6 Top KPI Cards -->
+      <div class="grid grid-cols-6 gap-3">
+        <div class="bg-white p-3 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-[10px] font-bold text-slate-500 tracking-wider">TOTAL EMPLOYEES</div>
+          <div class="text-2xl font-black text-slate-800 my-1">33</div>
+          <div class="text-[10px] text-slate-400 font-medium">Report header</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-[10px] font-bold text-slate-500 tracking-wider">ATTENDANCE DATA</div>
+          <div class="text-2xl font-black text-slate-800 my-1">27</div>
+          <div class="text-[10px] text-slate-400 font-medium">Employees in detail table</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-[10px] font-bold text-slate-500 tracking-wider">LATE MINUTES</div>
+          <div class="text-2xl font-black text-slate-800 my-1">5,289</div>
+          <div class="text-[10px] font-bold text-rose-600">
+            +671 vs last month
+          </div>
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-[10px] font-bold text-slate-500 tracking-wider">LATE DAYS</div>
+          <div class="text-2xl font-black text-slate-800 my-1">212</div>
+          <div class="text-[10px] font-bold text-rose-600">
+            +31 vs last month
+          </div>
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-[10px] font-bold text-slate-500 tracking-wider">AVERAGE SCORE</div>
+          <div class="text-2xl font-black text-slate-800 my-1">61.09</div>
+          <div class="text-[10px] text-slate-400 font-medium">Basis 27 employees</div>
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-[10px] font-bold text-slate-500 tracking-wider">SCORE < 60</div>
+          <div class="text-2xl font-black text-rose-600 my-1">12</div>
+          <div class="text-[10px] text-slate-400 font-medium">Dashboard analysis band</div>
+        </div>
+      </div>
+
+      <!-- Second Row: Charts & Matrix -->
+      <div class="grid grid-cols-4 gap-3 mt-3">
+        <!-- Minutes Comparison -->
+        <div class="bg-white p-3.5 rounded-lg border border-slate-200/80 shadow-xs">
+          <div class="text-xs font-bold text-slate-800 mb-2">Total Lateness Minutes</div>
+          <div class="space-y-2 text-[11px]">
+            <div>
+              <div class="flex justify-between text-slate-500 mb-0.5">
+                <span>Last month</span>
+                <span class="font-semibold text-slate-700">4,618 mnt</span>
+              </div>
+              <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-slate-400" style="width: 85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-slate-700 font-semibold mb-0.5">
+                <span>Agustus</span>
+                <span class="font-bold text-blue-700">5,289 mnt</span>
+              </div>
+              <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-blue-600" style="width: 100%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-2 text-[11px] font-bold text-rose-600">
+            Worsened: +671 mnt
+          </div>
+        </div>
+
+        <!-- Days Comparison -->
+        <div class="bg-white p-3.5 rounded-lg border border-slate-200/80 shadow-xs">
+          <div class="text-xs font-bold text-slate-800 mb-2">Total Lateness Days</div>
+          <div class="space-y-2 text-[11px]">
+            <div>
+              <div class="flex justify-between text-slate-500 mb-0.5">
+                <span>Last month</span>
+                <span class="font-semibold text-slate-700">181 hari</span>
+              </div>
+              <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-slate-400" style="width: 85%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-slate-700 font-semibold mb-0.5">
+                <span>Agustus</span>
+                <span class="font-bold text-blue-700">212 hari</span>
+              </div>
+              <div class="h-2 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-blue-600" style="width: 100%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-2 text-[11px] font-bold text-rose-600">
+            Worsened: +31 hari
+          </div>
+        </div>
+
+        <!-- Score Distribution -->
+        <div class="bg-white p-3.5 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-xs font-bold text-slate-800 mb-1">Attendance Score Distribution</div>
+          <div class="flex h-5 rounded overflow-hidden text-[10px] font-bold text-white text-center">
+            <div style="width: 18.51851851851852%; background-color: #10b981;" title=">=90">5</div>
+            <div style="width: 18.51851851851852%; background-color: #06b6d4;" title="75-89.99">5</div>
+            <div style="width: 18.51851851851852%; background-color: #f59e0b;" title="60-74.99">5</div>
+            <div style="width: 44.44444444444444%; background-color: #ef4444;" title="<60">12</div>
+          </div>
+          <div class="grid grid-cols-2 gap-1 text-[10px] text-slate-600 mt-2">
+            <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500 inline-block"></span> >=90: 5</div>
+            <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-cyan-500 inline-block"></span> 75-89,99: 5</div>
+            <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-500 inline-block"></span> 60-74,99: 5</div>
+            <div class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-rose-500 inline-block"></span> &lt;60: 12</div>
+          </div>
+        </div>
+
+        <!-- Absence & WFH Matrix -->
+        <div class="bg-white p-3.5 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-xs font-bold text-slate-800 mb-1">Absence & WFH</div>
+          <div class="grid grid-cols-3 gap-1.5 text-center">
+            <div class="bg-amber-50/70 border border-amber-200/60 rounded p-1">
+              <div class="text-sm font-black text-amber-700">3</div>
+              <div class="text-[9px] text-amber-600 font-semibold">Permit</div>
+            </div>
+            <div class="bg-rose-50/70 border border-rose-200/60 rounded p-1">
+              <div class="text-sm font-black text-rose-700">1</div>
+              <div class="text-[9px] text-rose-600 font-semibold">Sick</div>
+            </div>
+            <div class="bg-purple-50/70 border border-purple-200/60 rounded p-1">
+              <div class="text-sm font-black text-purple-700">1</div>
+              <div class="text-[9px] text-purple-600 font-semibold leading-tight">Sick (no note)</div>
+            </div>
+            <div class="bg-slate-50 border border-slate-200/60 rounded p-1">
+              <div class="text-sm font-black text-slate-700">0</div>
+              <div class="text-[9px] text-slate-500 font-semibold">Unexcused</div>
+            </div>
+            <div class="bg-blue-50/70 border border-blue-200/60 rounded p-1">
+              <div class="text-sm font-black text-blue-700">2</div>
+              <div class="text-[9px] text-blue-600 font-semibold">Leave</div>
+            </div>
+            <div class="bg-emerald-50/70 border border-emerald-200/60 rounded p-1">
+              <div class="text-sm font-black text-emerald-700">5</div>
+              <div class="text-[9px] text-emerald-600 font-semibold">WFH</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Third Row: Executive Summary (AI Narratives) -->
+      <div class="bg-white p-4 rounded-lg border border-slate-200/80 shadow-xs mt-3 flex-1">
+        <h3 class="text-xs font-bold text-slate-900 mb-2 flex items-center gap-1.5">
+          <span class="w-1.5 h-3.5 bg-blue-600 rounded-xs"></span>
+          Executive Summary - Board Focus
+        </h3>
+        <div class="grid grid-cols-2 gap-x-6 gap-y-1.5 text-[11px] text-slate-700 leading-relaxed">
+          
+            <div class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+              <span>Lateness in Agustus 2026 increased from 4,618 to 5,289 minutes: up 671 minutes (14,5%).</span>
+            </div>
+          
+            <div class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+              <span>Lateness frequency increased from 181 to 212 days: up 31 days (17,1%).</span>
+            </div>
+          
+            <div class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+              <span>Out of 27 employees on the detail table, 5 scored >=90 and 12 scored <60.</span>
+            </div>
+          
+            <div class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+              <span>Highest risk is concentrated on Ferddy Fauzan Ramadhan, Nizar Muharam, Ramdani Pratama Saepudin, A. Gymnastiar, Ikbal Dwipayana Romli.</span>
+            </div>
+          
+            <div class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+              <span>Data scope: header 33 employees, workforce profile 31 employees, and attendance detail 27 employees.</span>
+            </div>
+          
+        </div>
+      </div>
+
+      <!-- Fourth Row: Bottom 3 Highlight Badges -->
+      <div class="grid grid-cols-3 gap-3 mt-3">
+        <div class="bg-rose-50/80 border-rose-200 border rounded-lg p-2.5 flex items-center justify-between">
+          <div>
+            <div class="text-xs font-black text-rose-700 uppercase">
+              Worsened
+            </div>
+            <div class="text-[10px] font-bold text-slate-500">OVERALL TREND</div>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-700">
+            Menit +14,5% | Hari +17,1%
+          </div>
+        </div>
+
+        <div class="bg-amber-50/80 border border-amber-200 rounded-lg p-2.5 flex items-center justify-between">
+          <div>
+            <div class="text-xs font-black text-amber-700 uppercase">12 EMPLOYEES</div>
+            <div class="text-[10px] font-bold text-slate-500">RISK GROUP</div>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-700">
+            Skor &lt; 60 dari 27 pegawai
+          </div>
+        </div>
+
+        <div class="bg-slate-100 border border-slate-200 rounded-lg p-2.5 flex items-center justify-between">
+          <div>
+            <div class="text-xs font-black text-slate-800">33 / 31 / 27</div>
+            <div class="text-[10px] font-bold text-slate-500">DATA INTEGRITY</div>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-600">
+            Data basis inconsistent
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="px-8 py-2 border-t border-slate-200 text-[10px] text-slate-400 flex justify-between items-center bg-white shrink-0">
+      <span>Confidential - Internal Management Use</span>
+      <span>Periode Agustus 2026 | Page 1</span>
+    </div>
+  </div>
+
+
+  <!-- ==================== PAGE 2: WORKFORCE PROFILE ==================== -->
+  <div class="slide-page">
+    <div class="bg-[#0f1e36] text-white px-8 py-3.5 flex justify-between items-center shrink-0">
+      <div>
+        <div class="text-[11px] font-bold tracking-wider text-slate-300 uppercase">WORKFORCE PROFILE</div>
+        <h1 class="text-xl font-extrabold tracking-tight">EMPLOYEE PROFILE</h1>
+      </div>
+      <div class="text-xs font-semibold text-slate-300">Composition based on source data</div>
+    </div>
+
+    <div class="p-6 flex-1 flex flex-col justify-between overflow-hidden">
+      <!-- 2x2 Demographic Grid -->
+      <div class="grid grid-cols-2 gap-4 flex-1">
+        <!-- Status Pegawai -->
+        <div class="bg-white p-4 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-xs font-bold text-slate-800 mb-2">Employee Status</div>
+          <div class="space-y-2 text-[11px]">
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">Direktur</span>
+                  <span class="font-semibold text-slate-800">1 | 3,03%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 3.03%"></div>
+                </div>
+              </div>
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">Manager</span>
+                  <span class="font-semibold text-slate-800">2 | 6,06%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 6.06%"></div>
+                </div>
+              </div>
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">Karyawan Tetap</span>
+                  <span class="font-semibold text-slate-800">11 | 33,33%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 33.33%"></div>
+                </div>
+              </div>
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">Karyawan Kontrak</span>
+                  <span class="font-semibold text-slate-800">17 | 57,58%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 57.58%"></div>
+                </div>
+              </div>
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">Probation</span>
+                  <span class="font-semibold text-slate-800">0 | 0,00%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 0%"></div>
+                </div>
+              </div>
+            
+          </div>
+        </div>
+
+        <!-- Jenis Kelamin -->
+        <div class="bg-white p-4 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-xs font-bold text-slate-800 mb-2">Gender</div>
+          <div class="space-y-3 text-[11px]">
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">Laki Laki</span>
+                  <span class="font-semibold text-slate-800">31 | 93,94%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 93.94%"></div>
+                </div>
+              </div>
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">Perempuan</span>
+                  <span class="font-semibold text-slate-800">2 | 6,06%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 6.06%"></div>
+                </div>
+              </div>
+            
+          </div>
+        </div>
+
+        <!-- Pendidikan -->
+        <div class="bg-white p-4 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-xs font-bold text-slate-800 mb-2">Education</div>
+          <div class="space-y-2 text-[11px]">
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">SMK/SMA</span>
+                  <span class="font-semibold text-slate-800">16 | 51,61%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 51.61%"></div>
+                </div>
+              </div>
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">D3</span>
+                  <span class="font-semibold text-slate-800">5 | 16,13%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 16.13%"></div>
+                </div>
+              </div>
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">S1</span>
+                  <span class="font-semibold text-slate-800">9 | 29,03%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 29.03%"></div>
+                </div>
+              </div>
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">D4</span>
+                  <span class="font-semibold text-slate-800">1 | 3,23%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 3.23%"></div>
+                </div>
+              </div>
+            
+          </div>
+        </div>
+
+        <!-- Jabatan -->
+        <div class="bg-white p-4 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-xs font-bold text-slate-800 mb-2">Job Position</div>
+          <div class="space-y-2 text-[11px]">
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">Direktur</span>
+                  <span class="font-semibold text-slate-800">1 | 3,23%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 3.23%"></div>
+                </div>
+              </div>
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">Manager</span>
+                  <span class="font-semibold text-slate-800">2 | 6,45%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 6.45%"></div>
+                </div>
+              </div>
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">LEAD</span>
+                  <span class="font-semibold text-slate-800">4 | 12,90%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 12.9%"></div>
+                </div>
+              </div>
+            
+              <div>
+                <div class="flex justify-between text-slate-600 mb-0.5">
+                  <span class="font-medium">STAF</span>
+                  <span class="font-semibold text-slate-800">24 | 77,42%</span>
+                </div>
+                <div class="h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-blue-600 rounded-full" style="width: 77.42%"></div>
+                </div>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Catatan Validasi Data Profil -->
+      <div class="bg-white p-4 rounded-lg border border-slate-200/80 shadow-xs mt-4 shrink-0">
+        <h3 class="text-xs font-bold text-slate-900 mb-2 flex items-center gap-1.5">
+          <span class="w-1.5 h-3.5 bg-blue-600 rounded-xs"></span>
+          Profile Data Validation Notes
+        </h3>
+        <div class="grid grid-cols-2 gap-4 text-[11px] text-slate-700 leading-relaxed">
+          
+            <div class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+              <span>Header and gender records show 33 employees.</span>
+            </div>
+          
+            <div class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+              <span>Status, education, and position tables each record 31 employees.</span>
+            </div>
+          
+            <div class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+              <span>Difference observed across master data (33), demographic profile (31), and attendance table (27); presented as-is.</span>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="px-8 py-2 border-t border-slate-200 text-[10px] text-slate-400 flex justify-between items-center bg-white shrink-0">
+      <span>Confidential - Internal Management Use</span>
+      <span>Periode Agustus 2026 | Page 2</span>
+    </div>
+  </div>
+
+
+  <!-- ==================== PAGE 3: ATTENDANCE ANALYTICS ==================== -->
+  <div class="slide-page">
+    <div class="bg-[#0f1e36] text-white px-8 py-3.5 flex justify-between items-center shrink-0">
+      <div>
+        <div class="text-[11px] font-bold tracking-wider text-slate-300 uppercase">ATTENDANCE ANALYTICS</div>
+        <h1 class="text-xl font-extrabold tracking-tight">ATTENDANCE & LATENESS ANALYSIS</h1>
+      </div>
+      <div class="text-xs font-semibold text-slate-300">Agustus 2026 compared to previous month</div>
+    </div>
+
+    <div class="p-6 flex-1 flex flex-col justify-between overflow-hidden">
+      <!-- 3 Columns Top -->
+      <div class="grid grid-cols-3 gap-3">
+        <!-- Min Comparison -->
+        <div class="bg-white p-3.5 rounded-lg border border-slate-200/80 shadow-xs">
+          <div class="text-xs font-bold text-slate-800 mb-2">Lateness Minutes Comparison</div>
+          <div class="space-y-2 text-[11px]">
+            <div>
+              <div class="flex justify-between text-slate-500 mb-0.5">
+                <span>Last month</span>
+                <span class="font-semibold text-slate-700">4,618 menit</span>
+              </div>
+              <div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-slate-400 rounded-full" style="width: 80%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-slate-700 font-semibold mb-0.5">
+                <span>Agustus</span>
+                <span class="font-bold text-blue-700">5,289 menit</span>
+              </div>
+              <div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-blue-600 rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-2 text-[11px] font-bold text-rose-600">
+            Worsened: +671 menit
+          </div>
+        </div>
+
+        <!-- Day Comparison -->
+        <div class="bg-white p-3.5 rounded-lg border border-slate-200/80 shadow-xs">
+          <div class="text-xs font-bold text-slate-800 mb-2">Lateness Days Comparison</div>
+          <div class="space-y-2 text-[11px]">
+            <div>
+              <div class="flex justify-between text-slate-500 mb-0.5">
+                <span>Last month</span>
+                <span class="font-semibold text-slate-700">181 hari</span>
+              </div>
+              <div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-slate-400 rounded-full" style="width: 80%"></div>
+              </div>
+            </div>
+            <div>
+              <div class="flex justify-between text-slate-700 font-semibold mb-0.5">
+                <span>Agustus</span>
+                <span class="font-bold text-blue-700">212 hari</span>
+              </div>
+              <div class="h-3 bg-slate-100 rounded-full overflow-hidden">
+                <div class="h-full bg-blue-600 rounded-full" style="width: 100%"></div>
+              </div>
+            </div>
+          </div>
+          <div class="mt-2 text-[11px] font-bold text-rose-600">
+            Worsened: +31 hari
+          </div>
+        </div>
+
+        <!-- Change per employee (Minutes) -->
+        <div class="bg-white p-3.5 rounded-lg border border-slate-200/80 shadow-xs">
+          <div class="text-xs font-bold text-slate-800 mb-2">Employee Change - Minutes</div>
+          <div class="space-y-1.5 text-[11px]">
+            <div class="flex items-center justify-between">
+              <span class="text-slate-600">Improved</span>
+              <div class="flex items-center gap-2">
+                <div class="w-24 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-emerald-500 rounded-full" style="width: 29.629629629629626%"></div>
+                </div>
+                <span class="font-bold text-slate-800 w-4 text-right">8</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-600">Worsened</span>
+              <div class="flex items-center gap-2">
+                <div class="w-24 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-rose-500 rounded-full" style="width: 62.96296296296296%"></div>
+                </div>
+                <span class="font-bold text-slate-800 w-4 text-right">17</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-600">Stable</span>
+              <div class="flex items-center gap-2">
+                <div class="w-24 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-slate-400 rounded-full" style="width: 7.4074074074074066%"></div>
+                </div>
+                <span class="font-bold text-slate-800 w-4 text-right">2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3 Columns Middle: Days change & Top Tables -->
+      <div class="grid grid-cols-3 gap-3 mt-3">
+        <!-- Change per employee (Days) -->
+        <div class="bg-white p-3.5 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-xs font-bold text-slate-800 mb-2">Employee Change - Days</div>
+          <div class="space-y-1.5 text-[11px]">
+            <div class="flex items-center justify-between">
+              <span class="text-slate-600">Improved</span>
+              <div class="flex items-center gap-2">
+                <div class="w-24 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-emerald-500 rounded-full" style="width: 33.33333333333333%"></div>
+                </div>
+                <span class="font-bold text-slate-800 w-4 text-right">9</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-600">Worsened</span>
+              <div class="flex items-center gap-2">
+                <div class="w-24 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-rose-500 rounded-full" style="width: 59.25925925925925%"></div>
+                </div>
+                <span class="font-bold text-slate-800 w-4 text-right">16</span>
+              </div>
+            </div>
+            <div class="flex items-center justify-between">
+              <span class="text-slate-600">Stable</span>
+              <div class="flex items-center gap-2">
+                <div class="w-24 h-2.5 bg-slate-100 rounded-full overflow-hidden">
+                  <div class="h-full bg-slate-400 rounded-full" style="width: 7.4074074074074066%"></div>
+                </div>
+                <span class="font-bold text-slate-800 w-4 text-right">2</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Top Improvements Table -->
+        <div class="bg-white p-3 rounded-lg border border-slate-200/80 shadow-xs">
+          <div class="text-xs font-bold text-slate-800 mb-1.5">Top Minute Improvements</div>
+          <table class="w-full text-[10px]">
+            <thead>
+              <tr class="bg-slate-800 text-white">
+                <th class="py-1 px-1.5 text-left rounded-l">No</th>
+                <th class="py-1 px-1.5 text-left">Nama</th>
+                <th class="py-1 px-1.5 text-right rounded-r">(+/-)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              
+                <tr>
+                  <td class="py-1 px-1.5 text-slate-400">1</td>
+                  <td class="py-1 px-1.5 font-medium text-slate-700 truncate max-w-[130px]">Muhammad Kautsar Alifan Mudzakir</td>
+                  <td class="py-1 px-1.5 text-right font-bold text-emerald-600">+234</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-1.5 text-slate-400">2</td>
+                  <td class="py-1 px-1.5 font-medium text-slate-700 truncate max-w-[130px]">A. Gymnastiar</td>
+                  <td class="py-1 px-1.5 text-right font-bold text-emerald-600">+154</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-1.5 text-slate-400">3</td>
+                  <td class="py-1 px-1.5 font-medium text-slate-700 truncate max-w-[130px]">Nizar Muharam</td>
+                  <td class="py-1 px-1.5 text-right font-bold text-emerald-600">+109</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-1.5 text-slate-400">4</td>
+                  <td class="py-1 px-1.5 font-medium text-slate-700 truncate max-w-[130px]">Dicky Nursalim</td>
+                  <td class="py-1 px-1.5 text-right font-bold text-emerald-600">+102</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-1.5 text-slate-400">5</td>
+                  <td class="py-1 px-1.5 font-medium text-slate-700 truncate max-w-[130px]">Rizky Agestyas Athallah</td>
+                  <td class="py-1 px-1.5 text-right font-bold text-emerald-600">+40</td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Top Declines Table -->
+        <div class="bg-white p-3 rounded-lg border border-slate-200/80 shadow-xs">
+          <div class="text-xs font-bold text-slate-800 mb-1.5">Top Minute Declines</div>
+          <table class="w-full text-[10px]">
+            <thead>
+              <tr class="bg-slate-800 text-white">
+                <th class="py-1 px-1.5 text-left rounded-l">No</th>
+                <th class="py-1 px-1.5 text-left">Nama</th>
+                <th class="py-1 px-1.5 text-right rounded-r">(+/-)</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              
+                <tr>
+                  <td class="py-1 px-1.5 text-slate-400">1</td>
+                  <td class="py-1 px-1.5 font-medium text-slate-700 truncate max-w-[130px]">Ferddy Fauzan Ramadhan</td>
+                  <td class="py-1 px-1.5 text-right font-bold text-rose-600">-286</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-1.5 text-slate-400">2</td>
+                  <td class="py-1 px-1.5 font-medium text-slate-700 truncate max-w-[130px]">Ramdani Pratama Saepudin</td>
+                  <td class="py-1 px-1.5 text-right font-bold text-rose-600">-186</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-1.5 text-slate-400">3</td>
+                  <td class="py-1 px-1.5 font-medium text-slate-700 truncate max-w-[130px]">Heri Hermawan</td>
+                  <td class="py-1 px-1.5 text-right font-bold text-rose-600">-174</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-1.5 text-slate-400">4</td>
+                  <td class="py-1 px-1.5 font-medium text-slate-700 truncate max-w-[130px]">Taufik Dika Permana</td>
+                  <td class="py-1 px-1.5 text-right font-bold text-rose-600">-143</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-1.5 text-slate-400">5</td>
+                  <td class="py-1 px-1.5 font-medium text-slate-700 truncate max-w-[130px]">Ade Mursidin</td>
+                  <td class="py-1 px-1.5 text-right font-bold text-rose-600">-135</td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Interpretasi Analisis -->
+      <div class="bg-white p-3.5 rounded-lg border border-slate-200/80 shadow-xs mt-3 flex-1">
+        <h3 class="text-xs font-bold text-slate-900 mb-1.5 flex items-center gap-1.5">
+          <span class="w-1.5 h-3.5 bg-blue-600 rounded-xs"></span>
+          Analysis Interpretation
+        </h3>
+        <div class="space-y-1 text-[11px] text-slate-700 leading-relaxed">
+          
+            <div class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+              <span>The (+/-) column represents Previous Month - Agustus 2026: positive values denote lateness reduction (improvement), negative values denote increase (decline).</span>
+            </div>
+          
+            <div class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+              <span>Aggregately, Agustus 2026 worsened by 14,5% in late minutes and worsened by 17,1% in late days.</span>
+            </div>
+          
+            <div class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+              <span>Employees declining in late minutes: 17 out of 27; improving: 8; stable: 2.</span>
+            </div>
+          
+        </div>
+      </div>
+
+      <!-- Bottom Summary Cards -->
+      <div class="grid grid-cols-3 gap-3 mt-3">
+        <div class="bg-slate-100 border border-slate-200 rounded-lg p-2.5 flex items-center justify-between">
+          <div>
+            <div class="text-xs font-black text-rose-700">
+              17 MEMBURUK
+            </div>
+            <div class="text-[10px] font-bold text-slate-500">PERUBAHAN MENIT</div>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-600">
+            8 membaik | 2 tetap
+          </div>
+        </div>
+
+        <div class="bg-slate-100 border border-slate-200 rounded-lg p-2.5 flex items-center justify-between">
+          <div>
+            <div class="text-xs font-black text-rose-700">
+              16 MEMBURUK
+            </div>
+            <div class="text-[10px] font-bold text-slate-500">PERUBAHAN HARI</div>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-600">
+            9 membaik | 2 tetap
+          </div>
+        </div>
+
+        <div class="bg-slate-100 border border-slate-200 rounded-lg p-2.5 flex items-center justify-between">
+          <div>
+            <div class="text-xs font-black text-rose-700">
+              NEGATIF
+            </div>
+            <div class="text-[10px] font-bold text-slate-500">TREND CONCLUSION</div>
+          </div>
+          <div class="text-[11px] font-semibold text-slate-600 truncate max-w-[190px]">
+            Agustus worsened compared to previous month
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="px-8 py-2 border-t border-slate-200 text-[10px] text-slate-400 flex justify-between items-center bg-white shrink-0">
+      <span>Confidential - Internal Management Use</span>
+      <span>Periode Agustus 2026 | Page 3</span>
+    </div>
+  </div>
+
+
+  <!-- ==================== PAGE 4: RISK MONITORING ==================== -->
+  <div class="slide-page">
+    <div class="bg-[#0f1e36] text-white px-8 py-3.5 flex justify-between items-center shrink-0">
+      <div>
+        <div class="text-[11px] font-bold tracking-wider text-slate-300 uppercase">RISK MONITORING</div>
+        <h1 class="text-xl font-extrabold tracking-tight">EMPLOYEE ATTENDANCE RISK</h1>
+      </div>
+      <div class="text-xs font-semibold text-slate-300">Priority monitoring based on score, duration, and frequency</div>
+    </div>
+
+    <div class="p-6 flex-1 flex flex-col justify-between overflow-hidden">
+      <!-- 2x2 Tables Grid -->
+      <div class="grid grid-cols-2 gap-4 flex-1">
+        <!-- 5 Skor Terendah -->
+        <div class="bg-white p-3.5 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-xs font-bold text-slate-800 mb-1.5">Bottom 5 Attendance Scores</div>
+          <table class="w-full text-[10px]">
+            <thead>
+              <tr class="bg-slate-800 text-white">
+                <th class="py-1 px-2 text-left rounded-l">No</th>
+                <th class="py-1 px-2 text-left">Nama</th>
+                <th class="py-1 px-2 text-center">Skor</th>
+                <th class="py-1 px-2 text-center">Menit</th>
+                <th class="py-1 px-2 text-center rounded-r">Hari</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">1</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Ferddy Fauzan Ramadhan</td>
+                  <td class="py-1 px-2 text-center font-bold text-rose-600 bg-rose-50/50">9.75</td>
+                  <td class="py-1 px-2 text-center text-slate-700">566</td>
+                  <td class="py-1 px-2 text-center text-slate-700">17</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">2</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Nizar Muharam</td>
+                  <td class="py-1 px-2 text-center font-bold text-rose-600 bg-rose-50/50">9.75</td>
+                  <td class="py-1 px-2 text-center text-slate-700">747</td>
+                  <td class="py-1 px-2 text-center text-slate-700">17</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">3</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Ramdani Pratama Saepudin</td>
+                  <td class="py-1 px-2 text-center font-bold text-rose-600 bg-rose-50/50">16.25</td>
+                  <td class="py-1 px-2 text-center text-slate-700">532</td>
+                  <td class="py-1 px-2 text-center text-slate-700">15</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">4</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">A. Gymnastiar</td>
+                  <td class="py-1 px-2 text-center font-bold text-rose-600 bg-rose-50/50">26.00</td>
+                  <td class="py-1 px-2 text-center text-slate-700">536</td>
+                  <td class="py-1 px-2 text-center text-slate-700">12</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">5</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Ikbal Dwipayana Romli</td>
+                  <td class="py-1 px-2 text-center font-bold text-rose-600 bg-rose-50/50">29.25</td>
+                  <td class="py-1 px-2 text-center text-slate-700">510</td>
+                  <td class="py-1 px-2 text-center text-slate-700">11</td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 5 Menit Tertinggi -->
+        <div class="bg-white p-3.5 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-xs font-bold text-slate-800 mb-1.5">Top 5 Lateness Minutes</div>
+          <table class="w-full text-[10px]">
+            <thead>
+              <tr class="bg-slate-800 text-white">
+                <th class="py-1 px-2 text-left rounded-l">No</th>
+                <th class="py-1 px-2 text-left">Nama</th>
+                <th class="py-1 px-2 text-center">Menit</th>
+                <th class="py-1 px-2 text-center">Hari</th>
+                <th class="py-1 px-2 text-center rounded-r">Skor</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">1</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Nizar Muharam</td>
+                  <td class="py-1 px-2 text-center font-bold text-slate-800">747</td>
+                  <td class="py-1 px-2 text-center text-slate-700">17</td>
+                  <td class="py-1 px-2 text-center font-semibold text-slate-700">9.75</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">2</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Ferddy Fauzan Ramadhan</td>
+                  <td class="py-1 px-2 text-center font-bold text-slate-800">566</td>
+                  <td class="py-1 px-2 text-center text-slate-700">17</td>
+                  <td class="py-1 px-2 text-center font-semibold text-slate-700">9.75</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">3</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">A. Gymnastiar</td>
+                  <td class="py-1 px-2 text-center font-bold text-slate-800">536</td>
+                  <td class="py-1 px-2 text-center text-slate-700">12</td>
+                  <td class="py-1 px-2 text-center font-semibold text-slate-700">26.00</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">4</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Ramdani Pratama Saepudin</td>
+                  <td class="py-1 px-2 text-center font-bold text-slate-800">532</td>
+                  <td class="py-1 px-2 text-center text-slate-700">15</td>
+                  <td class="py-1 px-2 text-center font-semibold text-slate-700">16.25</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">5</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Ikbal Dwipayana Romli</td>
+                  <td class="py-1 px-2 text-center font-bold text-slate-800">510</td>
+                  <td class="py-1 px-2 text-center text-slate-700">11</td>
+                  <td class="py-1 px-2 text-center font-semibold text-slate-700">29.25</td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+
+        <!-- 5 Hari Terbanyak -->
+        <div class="bg-white p-3.5 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-xs font-bold text-slate-800 mb-1.5">Top 5 Lateness Days</div>
+          <table class="w-full text-[10px]">
+            <thead>
+              <tr class="bg-slate-800 text-white">
+                <th class="py-1 px-2 text-left rounded-l">No</th>
+                <th class="py-1 px-2 text-left">Nama</th>
+                <th class="py-1 px-2 text-center">Hari</th>
+                <th class="py-1 px-2 text-center">Menit</th>
+                <th class="py-1 px-2 text-center rounded-r">Skor</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">1</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Ferddy Fauzan Ramadhan</td>
+                  <td class="py-1 px-2 text-center font-bold text-slate-800">17</td>
+                  <td class="py-1 px-2 text-center text-slate-700">566</td>
+                  <td class="py-1 px-2 text-center font-semibold text-slate-700">9.75</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">2</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Nizar Muharam</td>
+                  <td class="py-1 px-2 text-center font-bold text-slate-800">17</td>
+                  <td class="py-1 px-2 text-center text-slate-700">747</td>
+                  <td class="py-1 px-2 text-center font-semibold text-slate-700">9.75</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">3</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Ramdani Pratama Saepudin</td>
+                  <td class="py-1 px-2 text-center font-bold text-slate-800">15</td>
+                  <td class="py-1 px-2 text-center text-slate-700">532</td>
+                  <td class="py-1 px-2 text-center font-semibold text-slate-700">16.25</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">4</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">A. Gymnastiar</td>
+                  <td class="py-1 px-2 text-center font-bold text-slate-800">12</td>
+                  <td class="py-1 px-2 text-center text-slate-700">536</td>
+                  <td class="py-1 px-2 text-center font-semibold text-slate-700">26.00</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2 text-slate-400">5</td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Ade Mursidin</td>
+                  <td class="py-1 px-2 text-center font-bold text-slate-800">12</td>
+                  <td class="py-1 px-2 text-center text-slate-700">136</td>
+                  <td class="py-1 px-2 text-center font-semibold text-slate-700">50.42</td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Perubahan Paling Signifikan -->
+        <div class="bg-white p-3.5 rounded-lg border border-slate-200/80 shadow-xs flex flex-col justify-between">
+          <div class="text-xs font-bold text-slate-800 mb-1.5">Most Significant Changes</div>
+          <table class="w-full text-[10px]">
+            <thead>
+              <tr class="bg-slate-800 text-white">
+                <th class="py-1 px-2 text-left rounded-l">Status</th>
+                <th class="py-1 px-2 text-left">Nama</th>
+                <th class="py-1 px-2 text-right rounded-r">Perubahan</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              
+                <tr>
+                  <td class="py-1 px-2"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-100 text-emerald-800">Improved</span></td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Muhammad Kautsar Alifan Mudzakir</td>
+                  <td class="py-1 px-2 text-right font-bold text-emerald-600">+234 mnt</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-100 text-emerald-800">Improved</span></td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">A. Gymnastiar</td>
+                  <td class="py-1 px-2 text-right font-bold text-emerald-600">+154 mnt</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-emerald-100 text-emerald-800">Improved</span></td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Nizar Muharam</td>
+                  <td class="py-1 px-2 text-right font-bold text-emerald-600">+109 mnt</td>
+                </tr>
+              
+              
+                <tr>
+                  <td class="py-1 px-2"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-rose-100 text-rose-800">Worsened</span></td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Ferddy Fauzan Ramadhan</td>
+                  <td class="py-1 px-2 text-right font-bold text-rose-600">-286 mnt</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-rose-100 text-rose-800">Worsened</span></td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Ramdani Pratama Saepudin</td>
+                  <td class="py-1 px-2 text-right font-bold text-rose-600">-186 mnt</td>
+                </tr>
+              
+                <tr>
+                  <td class="py-1 px-2"><span class="px-1.5 py-0.5 rounded text-[9px] font-bold bg-rose-100 text-rose-800">Worsened</span></td>
+                  <td class="py-1 px-2 font-medium text-slate-700 truncate max-w-[150px]">Heri Hermawan</td>
+                  <td class="py-1 px-2 text-right font-bold text-rose-600">-174 mnt</td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Risk Interpretation Box -->
+      <div class="bg-white p-4 rounded-lg border border-slate-200/80 shadow-xs mt-3 shrink-0">
+        <h3 class="text-xs font-bold text-slate-900 mb-2 flex items-center gap-1.5">
+          <span class="w-1.5 h-3.5 bg-blue-600 rounded-xs"></span>
+          Risk Interpretation
+        </h3>
+        <div class="grid grid-cols-2 gap-4 text-[11px] text-slate-700 leading-relaxed">
+          
+            <div class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+              <span>Primary monitoring priority is placed on employees appearing simultaneously in low scores and high lateness duration/frequency.</span>
+            </div>
+          
+            <div class="flex items-start gap-2">
+              <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+              <span>Ferddy Fauzan Ramadhan and Nizar Muharam recorded scores of 9.75 and 9.75 with significant lateness requiring targeted intervention.</span>
+            </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="px-8 py-2 border-t border-slate-200 text-[10px] text-slate-400 flex justify-between items-center bg-white shrink-0">
+      <span>Confidential - Internal Management Use</span>
+      <span>Periode Agustus 2026 | Page 4</span>
+    </div>
+  </div>
+
+
+  <!-- ==================== PAGE 5: MANAGEMENT REVIEW ==================== -->
+  <div class="slide-page">
+    <div class="bg-[#0f1e36] text-white px-8 py-3.5 flex justify-between items-center shrink-0">
+      <div>
+        <div class="text-[11px] font-bold tracking-wider text-slate-300 uppercase">MANAGEMENT REVIEW</div>
+        <h1 class="text-xl font-extrabold tracking-tight">MANAGEMENT INSIGHT & RECOMMENDATION</h1>
+      </div>
+      <div class="text-xs font-semibold text-slate-300">Executive Decision Summary</div>
+    </div>
+
+    <div class="p-6 flex-1 flex flex-col justify-between overflow-hidden">
+      <!-- 2 Columns: Insight & Recommendations -->
+      <div class="grid grid-cols-2 gap-4 flex-1">
+        <!-- Management Insight -->
+        <div class="bg-white p-4 rounded-lg border border-slate-200/80 shadow-xs flex flex-col">
+          <h3 class="text-xs font-bold text-slate-900 mb-3 flex items-center gap-1.5">
+            <span class="w-1.5 h-3.5 bg-blue-600 rounded-xs"></span>
+            Management Insight
+          </h3>
+          <div class="space-y-2.5 text-[11px] text-slate-700 leading-relaxed flex-1">
+            
+              <div class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+                <span>Aggregate attendance discipline worsened: total late minutes up 671 (14,5%) and late days up 31 (17,1%).</span>
+              </div>
+            
+              <div class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+                <span>A total of 12 out of 27 employees fall into the <60 score band; 5 achieved >=90 score.</span>
+              </div>
+            
+              <div class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+                <span>Concentrated risk identified for Ferddy Fauzan Ramadhan, Nizar Muharam, Ramdani Pratama Saepudin, A. Gymnastiar, Ikbal Dwipayana Romli based on the combination of low score and high late metrics.</span>
+              </div>
+            
+              <div class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+                <span>Muhammad Kautsar Alifan Mudzakir demonstrated the largest minute improvement (+234), followed by A. Gymnastiar (+154).</span>
+              </div>
+            
+              <div class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1.5"></span>
+                <span>Recorded absences: permit 3, sick 1, sick without note 1, unexcused 0, leave 2, WFH 5.</span>
+              </div>
+            
+          </div>
+        </div>
+
+        <!-- Recommended Actions -->
+        <div class="bg-white p-4 rounded-lg border border-slate-200/80 shadow-xs flex flex-col">
+          <h3 class="text-xs font-bold text-slate-900 mb-3 flex items-center gap-1.5">
+            <span class="w-1.5 h-3.5 bg-emerald-600 rounded-xs"></span>
+            Recommended Management Actions
+          </h3>
+          <div class="space-y-2.5 text-[11px] text-slate-700 leading-relaxed flex-1">
+            
+              <div class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0 mt-1.5"></span>
+                <span>Institute monthly monitoring for employees with score <60 and review outcomes in the subsequent cycle.</span>
+              </div>
+            
+              <div class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0 mt-1.5"></span>
+                <span>Conduct coaching or causal clarification for employees experiencing notable deterioration in lateness minutes or days.</span>
+              </div>
+            
+              <div class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0 mt-1.5"></span>
+                <span>Differentiate management approaches between lateness duration issues and lateness frequency issues.</span>
+              </div>
+            
+              <div class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0 mt-1.5"></span>
+                <span>Monitor sustainability of gains among high-improving employees to ensure positive momentum is sustained.</span>
+              </div>
+            
+              <div class="flex items-start gap-2">
+                <span class="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0 mt-1.5"></span>
+                <span>Reconcile employee count discrepancy (33, 31, and 27) before utilizing data for formal policy decisions.</span>
+              </div>
+            
+          </div>
+        </div>
+      </div>
+
+      <!-- Executive Conclusion Banner -->
+      <div class="bg-[#0f1e36] text-white p-5 rounded-lg shadow-md mt-4 shrink-0">
+        <div class="text-[10px] font-bold text-sky-400 tracking-wider uppercase mb-1.5">
+          EXECUTIVE CONCLUSION
+        </div>
+        <div class="text-base font-extrabold tracking-tight mb-2">
+          Agustus 2026 indicates an increase in tardiness requiring management attention.
+        </div>
+        <div class="text-[11px] text-slate-300 space-y-1 leading-relaxed">
+          <p>Decision priorities: monitor high-risk personnel, investigate root causes of delays, and evaluate corrective actions next period.</p>
+          <p class="text-slate-400">Prior to formal actions, employee coverage basis should be reconciled to align executive decision-making.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="px-8 py-2 border-t border-slate-200 text-[10px] text-slate-400 flex justify-between items-center bg-white shrink-0">
+      <span>Confidential - Internal Management Use</span>
+      <span>Periode Agustus 2026 | Page 5</span>
+    </div>
+  </div>
+
+
+  <!-- ==================== PAGE 6: APPENDIX DETAIL DATA ==================== -->
+  <div class="slide-page">
+    <div class="bg-[#0f1e36] text-white px-8 py-3.5 flex justify-between items-center shrink-0">
+      <div>
+        <div class="text-[11px] font-bold tracking-wider text-slate-300 uppercase">APPENDIX</div>
+        <h1 class="text-xl font-extrabold tracking-tight">DETAILED EMPLOYEE ATTENDANCE DATA</h1>
+      </div>
+      <div class="text-xs font-semibold text-slate-300">Zero values displayed as '-' for improved readability</div>
+    </div>
+
+    <div class="p-6 flex-1 flex flex-col justify-between overflow-hidden">
+      <!-- Full Table -->
+      <div class="bg-white rounded-lg border border-slate-200/80 shadow-xs overflow-hidden flex-1 flex flex-col">
+        <div class="overflow-x-auto overflow-y-auto flex-1">
+          <table class="w-full text-[10px] border-collapse">
+            <thead class="sticky top-0 bg-slate-800 text-white font-semibold">
+              <tr>
+                <th class="py-1 px-1.5 text-center border-r border-slate-700 w-7">No</th>
+                <th class="py-1 px-2 text-left border-r border-slate-700 min-w-[130px]">Name</th>
+                <th class="py-1 px-1.5 text-center border-r border-slate-700">Min Agustus</th>
+                <th class="py-1 px-1.5 text-center border-r border-slate-700">Prev Min</th>
+                <th class="py-1 px-1.5 text-center border-r border-slate-700 bg-slate-700 font-bold">(+/-)</th>
+                <th class="py-1 px-1.5 text-center border-r border-slate-700">Days Agustus</th>
+                <th class="py-1 px-1.5 text-center border-r border-slate-700">Prev Days</th>
+                <th class="py-1 px-1.5 text-center border-r border-slate-700 bg-slate-700 font-bold">(+/-)</th>
+                <th class="py-1 px-1 text-center border-r border-slate-700">Permit</th>
+                <th class="py-1 px-1 text-center border-r border-slate-700">Sick</th>
+                <th class="py-1 px-1 text-center border-r border-slate-700">Sakit T.S.</th>
+                <th class="py-1 px-1 text-center border-r border-slate-700">Unexcused</th>
+                <th class="py-1 px-1 text-center border-r border-slate-700">Leave</th>
+                <th class="py-1 px-1 text-center border-r border-slate-700">WFH</th>
+                <th class="py-1 px-2 text-center bg-slate-900 font-black">Score</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100 text-slate-700">
+              
+                <tr class="bg-white hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">1</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">A. Gymnastiar</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">536</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">690</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +154
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">12</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">21</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +9
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-rose-600 bg-rose-50/50">
+                    26.00
+                  </td>
+                </tr>
+              
+                <tr class="bg-slate-50/70 hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">2</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Ade Mursidin</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">136</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">1</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -135
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">12</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -12
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">1</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-rose-600 bg-rose-50/50">
+                    50.42
+                  </td>
+                </tr>
+              
+                <tr class="bg-white hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">3</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Ade Suharmin</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">163</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">74</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -89
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">12</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">6</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -6
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-rose-600 bg-rose-50/50">
+                    48.32
+                  </td>
+                </tr>
+              
+                <tr class="bg-slate-50/70 hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">4</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Dicky Nursalim</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">22</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">124</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +102
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">6</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">15</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +9
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">1</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-slate-800">
+                    78.79
+                  </td>
+                </tr>
+              
+                <tr class="bg-white hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">5</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Fahmi Sabila Dinnulhaq</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">183</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">152</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -31
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">3</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">6</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +3
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-slate-800">
+                    76.02
+                  </td>
+                </tr>
+              
+                <tr class="bg-slate-50/70 hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">6</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Fajar Anugerah Iskandar</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-slate-400">
+                    -
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-slate-400">
+                    -
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">1</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-emerald-600">
+                    100.00
+                  </td>
+                </tr>
+              
+                <tr class="bg-white hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">7</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Fajar Dwi Mardiansyah</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">43</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">2</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -41
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">7</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">1</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -6
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-slate-800">
+                    73.91
+                  </td>
+                </tr>
+              
+                <tr class="bg-slate-50/70 hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">8</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Fayzal Febriansyah</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">112</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">60</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -52
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">8</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">5</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -3
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-slate-800">
+                    65.29
+                  </td>
+                </tr>
+              
+                <tr class="bg-white hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">9</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Febrie Zaeni Muchtar</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">25</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">10</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -15
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">2</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">4</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +2
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-emerald-600">
+                    91.56
+                  </td>
+                </tr>
+              
+                <tr class="bg-slate-50/70 hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">10</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Ferddy Fauzan Ramadhan</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">566</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">280</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -286
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">17</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">5</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -12
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-rose-600 bg-rose-50/50">
+                    9.75
+                  </td>
+                </tr>
+              
+                <tr class="bg-white hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">11</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Hari Heryadi</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">309</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">208</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -101
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">9</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">5</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -4
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-rose-600 bg-rose-50/50">
+                    46.72
+                  </td>
+                </tr>
+              
+                <tr class="bg-slate-50/70 hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">12</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Hadiyan Nurdyana</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">360</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">355</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -5
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">12</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">12</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-slate-400">
+                    -
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-rose-600 bg-rose-50/50">
+                    33.00
+                  </td>
+                </tr>
+              
+                <tr class="bg-white hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">13</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Heri Hermawan</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">255</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">81</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -174
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">7</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">4</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -3
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">1</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">2</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-rose-600 bg-rose-50/50">
+                    57.42
+                  </td>
+                </tr>
+              
+                <tr class="bg-slate-50/70 hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">14</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Ikbal Dwipayana Romli</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">510</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">525</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +15
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">11</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">8</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -3
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-rose-600 bg-rose-50/50">
+                    29.25
+                  </td>
+                </tr>
+              
+                <tr class="bg-white hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">15</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Luthfi Fadle Rynaldy</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">65</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">100</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +35
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">6</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">7</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +1
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">1</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-slate-800">
+                    75.44
+                  </td>
+                </tr>
+              
+                <tr class="bg-slate-50/70 hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">16</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Masrizki Muzakki</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">48</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">38</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -10
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">7</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">5</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -2
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-slate-800">
+                    73.52
+                  </td>
+                </tr>
+              
+                <tr class="bg-white hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">17</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Mira Nur Asyifa</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">14</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">3</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -11
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">2</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">1</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -1
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-emerald-600">
+                    92.41
+                  </td>
+                </tr>
+              
+                <tr class="bg-slate-50/70 hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">18</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Muhammad Husni Zarkasyi</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">45</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">20</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -25
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">8</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">3</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -5
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-slate-800">
+                    70.50
+                  </td>
+                </tr>
+              
+                <tr class="bg-white hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">19</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Muhammad Kautsar Alifan Mudzakir</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">78</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">312</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +234
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">6</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">13</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +7
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-slate-800">
+                    74.43
+                  </td>
+                </tr>
+              
+                <tr class="bg-slate-50/70 hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">20</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Nizar Muharam</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">747</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">856</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +109
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">17</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">14</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -3
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-rose-600 bg-rose-50/50">
+                    9.75
+                  </td>
+                </tr>
+              
+                <tr class="bg-white hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">21</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Ramdani Pratama Saepudin</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">532</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">346</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -186
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">15</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">12</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -3
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-rose-600 bg-rose-50/50">
+                    16.25
+                  </td>
+                </tr>
+              
+                <tr class="bg-slate-50/70 hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">22</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Rifqi rabbani</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-slate-400">
+                    -
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">2</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -2
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-emerald-600">
+                    93.50
+                  </td>
+                </tr>
+              
+                <tr class="bg-white hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">23</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Rivaldo Valentino</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">12</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +12
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">1</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +1
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">1</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-emerald-600">
+                    100.00
+                  </td>
+                </tr>
+              
+                <tr class="bg-slate-50/70 hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">24</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Rizky Agestyas Athallah</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">45</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">85</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +40
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">5</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">9</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +4
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">2</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-slate-800">
+                    80.25
+                  </td>
+                </tr>
+              
+                <tr class="bg-white hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">25</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Suci Rahmah</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">81</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">30</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -51
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">5</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">3</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -2
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">1</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-slate-800">
+                    77.45
+                  </td>
+                </tr>
+              
+                <tr class="bg-slate-50/70 hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">26</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Taufik Dika Permana</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">245</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">102</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -143
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">12</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">11</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -1
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-rose-600 bg-rose-50/50">
+                    41.94
+                  </td>
+                </tr>
+              
+                <tr class="bg-white hover:bg-blue-50/40">
+                  <td class="py-0.5 px-1.5 text-center text-slate-400 border-r border-slate-100">27</td>
+                  <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">Yudith Fabillah Arsy Pratama</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">169</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">152</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-rose-600 bg-rose-50/30">
+                    -17
+                  </td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">9</td>
+                  <td class="py-0.5 px-1.5 text-center border-r border-slate-100">10</td>
+                  <td class="py-0.5 px-1.5 text-center font-bold border-r border-slate-100 text-emerald-600 bg-emerald-50/30">
+                    +1
+                  </td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">1</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-1 text-center border-r border-slate-100">-</td>
+                  <td class="py-0.5 px-2 text-center font-bold text-rose-600 bg-rose-50/50">
+                    57.61
+                  </td>
+                </tr>
+              
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Footnote -->
+      <div class="mt-2 text-[10px] text-slate-500 font-medium">
+        Note (+/-): Last Month - Agustus. Positive = improved; negative = worsened.
+      </div>
+    </div>
+
+    <div class="px-8 py-2 border-t border-slate-200 text-[10px] text-slate-400 flex justify-between items-center bg-white shrink-0">
+      <span>Confidential - Internal Management Use</span>
+      <span>Periode Agustus 2026 | Page 6</span>
+    </div>
+  </div>
+
+</body>
+</html>

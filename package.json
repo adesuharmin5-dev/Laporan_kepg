@@ -1,0 +1,24 @@
+{
+  "name": "hr-report-generator",
+  "version": "1.0.0",
+  "description": "Executive Management HR & Attendance Report Generator with Multilingual AI Insights",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "generate": "node generate.js"
+  },
+  "keywords": [
+    "hr",
+    "report",
+    "executive",
+    "attendance",
+    "ai",
+    "generator"
+  ],
+  "author": "Antigravity",
+  "license": "MIT",
+  "dependencies": {
+    "pdf-parse": "^2.4.5",
+    "xlsx": "^0.18.5"
+  }
+}

@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Laporan Kepegawaian & Kehadiran Karyawan - Executive Viewer & Print All</title>
+  <script src="https://www.gstatic.com/antigravity/web/dev/tailwindcss.min.js"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .slide-page {
+      aspect-ratio: 16 / 9;
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      background: #f8fafc;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      border-radius: 0.75rem;
+    }
+
+    /* Print all 6 pages seamlessly in A4 landscape mode */
+    @page {
+      size: 297mm 210mm;
+      margin: 0;
+    }
+    @media print {
+      html, body {
+        width: 297mm !important;
+        height: 210mm !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        background: transparent !important;
+        color: #0f172a !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+      }
+      .no-print, header, nav, #slideContent, #uploadModal {
+        display: none !important;
+      }
+      #allPagesPrintContainer {
+        display: block !important;
+        width: 297mm !important;
+      }
+      .slide-page {
+        margin: 0 !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+        width: 297mm !important;
+        height: 210mm !important;
+        min-width: 297mm !important;
+        min-height: 210mm !important;
+        max-width: 297mm !important;
+        max-height: 210mm !important;
+        page-break-after: always !important;
+        break-after: page !important;
+        page-break-inside: avoid !important;
+        overflow: hidden !important;
+        box-sizing: border-box !important;
+        display: flex !important;
+        flex-direction: column !important;
+      }
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen p-4 md:p-6">
+
+  <!-- Top Controller Bar -->
+  <header class="no-print max-w-[1100px] mx-auto mb-4 bg-slate-800/90 backdrop-blur border border-slate-700/80 rounded-xl p-3.5 shadow-lg flex flex-wrap items-center justify-between gap-4">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-lg bg-blue-600 flex items-center justify-center font-black text-white text-lg shadow-md shadow-blue-500/30">
+        HR
+      </div>
+      <div>
+        <h2 class="text-base font-bold text-white tracking-tight flex items-center gap-2">
+          <span>Executive Report Generator</span>
+          <span class="text-[10px] font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-2 py-0.5 rounded-full flex items-center gap-1">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+            AI-Assisted
+          </span>
+        </h2>
+        <p class="text-xs text-slate-400">Periode: <span class="text-slate-200 font-bold" id="currentPeriodLabel">Juni 2026</span> <span class="text-[10px] ml-1 bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded border border-amber-500/30 font-medium">🔒 Terkunci</span></p>
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="flex flex-wrap items-center gap-2.5">
+      <!-- Period Switcher -->
+      <select id="periodSelect" onchange="switchPeriod(this.value)" class="bg-slate-900 border border-slate-700 text-xs text-slate-200 rounded-lg px-3 py-2 focus:outline-none focus:border-blue-500 font-medium">
+        <!-- Injected via JS -->
+      </select>
+
+      <!-- Language Selector -->
+      <div class="flex bg-slate-900 border border-slate-700 rounded-lg p-0.5">
+        <button id="langIdBtn" onclick="setLanguage('id')" class="text-xs px-2.5 py-1.5 rounded font-semibold transition bg-blue-600 text-white">ID</button>
+        <button id="langEnBtn" onclick="setLanguage('en')" class="text-xs px-2.5 py-1.5 rounded font-semibold transition text-slate-400 hover:text-slate-200">EN</button>
+      </div>
+
+      <!-- Upload Button -->
+      <button onclick="openUploadModal()" class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white text-xs font-semibold px-3.5 py-2 rounded-lg shadow-sm flex items-center gap-1.5 transition">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
+        <span>Upload & Kunci Periode</span>
+      </button>
+
+      <!-- CETAK SEMUA HALAMAN (PRIMARY ACTION) -->
+      <button onclick="printAllPages()" class="bg-blue-600 hover:bg-blue-500 active:scale-95 text-white text-xs font-bold px-4 py-2 rounded-lg shadow-md shadow-blue-600/30 flex items-center gap-2 transition border border-blue-400/30">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"></path></svg>
+        <span>Cetak Semua Halaman (PDF 6 Hal)</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Page Navigation Tabs -->
+  <nav class="no-print max-w-[1100px] mx-auto mb-4 flex items-center justify-between bg-slate-800/60 border border-slate-700/60 rounded-lg p-1.5 overflow-x-auto text-xs">
+    <div class="flex items-center gap-1 min-w-max">
+      <button onclick="goToPage(1)" id="tabBtn1" class="page-tab px-3 py-1.5 rounded-md font-semibold text-white bg-blue-600 transition">1. Executive Summary</button>
+      <button onclick="goToPage(2)" id="tabBtn2" class="page-tab px-3 py-1.5 rounded-md font-medium text-slate-300 hover:bg-slate-700/50 transition">2. Workforce Profile</button>
+      <button onclick="goToPage(3)" id="tabBtn3" class="page-tab px-3 py-1.5 rounded-md font-medium text-slate-300 hover:bg-slate-700/50 transition">3. Attendance Analytics</button>
+      <button onclick="goToPage(4)" id="tabBtn4" class="page-tab px-3 py-1.5 rounded-md font-medium text-slate-300 hover:bg-slate-700/50 transition">4. Risk Monitoring</button>
+      <button onclick="goToPage(5)" id="tabBtn5" class="page-tab px-3 py-1.5 rounded-md font-medium text-slate-300 hover:bg-slate-700/50 transition">5. Insight & Actions</button>
+      <button onclick="goToPage(6)" id="tabBtn6" class="page-tab px-3 py-1.5 rounded-md font-medium text-slate-300 hover:bg-slate-700/50 transition">6. Detail Appendix</button>
+    </div>
+    <div class="flex items-center gap-2 pl-3 text-slate-400">
+      <button onclick="prevPage()" class="p-1 hover:text-white rounded hover:bg-slate-700">◀</button>
+      <span id="pageIndicator" class="font-mono text-[11px] text-slate-300">1 / 6</span>
+      <button onclick="nextPage()" class="p-1 hover:text-white rounded hover:bg-slate-700">▶</button>
+    </div>
+  </nav>
+
+  <!-- Interactive Screen Slide Container -->
+  <main class="no-print page-container max-w-[1100px] mx-auto text-slate-800">
+    <div id="slideContent">
+      <!-- Dynamic Single Slide View -->
+    </div>
+  </main>
+
+  <!-- All Pages Print Container (Only active during print) -->
+  <div id="allPagesPrintContainer" class="hidden">
+    <!-- Injected with all 6 slides when printing -->
+  </div>
+
+  <!-- Upload Modal -->
+  <div id="uploadModal" class="fixed inset-0 bg-black/70 backdrop-blur-sm z-50 hidden flex items-center justify-center p-4 no-print">
+    <div class="bg-slate-800 border border-slate-700 rounded-2xl w-full max-w-xl overflow-hidden shadow-2xl flex flex-col">
+      <div class="px-6 py-4 bg-slate-850 border-b border-slate-700 flex justify-between items-center">
+        <div class="flex items-center gap-2">
+          <span class="text-xl">📤</span>
+          <h3 class="text-sm font-bold text-white">Upload Data & Kunci Periode</h3>
+        </div>
+        <button onclick="closeUploadModal()" class="text-slate-400 hover:text-white font-bold">✕</button>
+      </div>
+      <div class="p-6 space-y-4 text-xs text-slate-200">
+        <div onclick="document.getElementById('csvFileInput').click()" class="border-2 border-dashed border-slate-600 hover:border-blue-500 rounded-xl p-5 text-center cursor-pointer transition bg-slate-900/60">
+          <input type="file" id="csvFileInput" accept=".pdf,.csv,.json,.xlsx,.xls" class="hidden" onchange="handleLocalFile(this.files[0])">
+          <div class="text-2xl mb-1">📑</div>
+          <div class="font-semibold text-slate-200" id="localUploadStatus">Pilih file PDF (.pdf) atau Excel / CSV</div>
+          <p class="text-[10px] text-emerald-400 mt-1">🤖 AI otomatis mengekstrak tabel absensi & jumlah pegawai digenerate dari dalam aplikasi</p>
+        </div>
+
+        <div id="localPreviewSummary" class="hidden bg-slate-900/90 border border-slate-700 p-3 rounded-lg text-emerald-400 font-semibold text-[11px] flex justify-between items-center">
+          <span id="localPreviewText">Data berhasil dibaca</span>
+          <span id="localPreviewCount" class="text-slate-300 font-normal"></span>
+        </div>
+
+        <div>
+          <label class="block text-slate-400 font-medium mb-1">Nama Periode Baru <span class="text-rose-400">*</span></label>
+          <input type="text" id="modalPeriodName" placeholder="Contoh: Juli 2026" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+        </div>
+
+        <div>
+          <label class="block text-slate-400 font-medium mb-1">Kunci Periode Pembanding (Baseline Bulan Lalu)</label>
+          <select id="modalPrevPeriodSelect" class="w-full bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-blue-500">
+            <!-- Dynamically populated -->
+          </select>
+          <p class="text-[10px] text-slate-400 mt-1">Data periode yang dikunci akan dijadikan pembanding resmi untuk menghitung penurunan/perbaikan.</p>
+        </div>
+      </div>
+      <div class="px-6 py-4 bg-slate-850 border-t border-slate-700 flex justify-between items-center">
+        <button onclick="closeUploadModal()" class="px-3.5 py-1.5 text-slate-400 hover:text-white font-medium">Batal</button>
+        <button id="modalLockBtn" onclick="saveLockedPeriodLocal()" disabled class="bg-blue-600 disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-lg flex items-center gap-1.5 transition">
+          <span>🔒 Kunci Periode & Simpan</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const defaultPeriods = {
+      juni_2026: {
+        id: "juni_2026",
+        periode: "Juni 2026",
+        isLocked: true,
+        bulanLaluName: "Mei 2026",
+        totalPegawaiHeader: 33,
+        demographics: {
+          status: [
+            { label: "Direktur", count: 1, pct: 3.03 },
+            { label: "Manager", count: 2, pct: 6.06 },
+            { label: "Karyawan Tetap", count: 11, pct: 33.33 },
+            { label: "Karyawan Kontrak", count: 17, pct: 51.52 },
+            { label: "Probation", count: 2, pct: 6.06 }
+          ],
+          gender: [
+            { label: "Laki Laki", count: 31, pct: 93.94 },
+            { label: "Perempuan", count: 2, pct: 6.06 }
+          ],
+          education: [
+            { label: "SMK/SMA", count: 17, pct: 51.52 },
+            { label: "D3", count: 5, pct: 15.15 },
+            { label: "S1", count: 11, pct: 33.33 }
+          ],
+          position: [
+            { label: "Direktur", count: 1, pct: 3.03 },
+            { label: "Manager", count: 2, pct: 6.06 },
+            { label: "LEAD", count: 4, pct: 12.12 },
+            { label: "STAF", count: 26, pct: 78.79 }
+          ]
+        },
+        attendance: [
+          { no: 1, name: "A. Gymnastiar", mntCurrent: 530, mntLast: 579, deltaMnt: 49, hariCurrent: 12, hariLast: 13, deltaHari: 1, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 26.0 },
+          { no: 2, name: "Ade Mursidin", mntCurrent: 18, mntLast: 162, deltaMnt: 144, hariCurrent: 2, hariLast: 4, deltaHari: 2, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 92.1 },
+          { no: 3, name: "Ade Suharmin", mntCurrent: 242, mntLast: 192, deltaMnt: -50, hariCurrent: 14, hariLast: 14, deltaHari: 0, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 35.68 },
+          { no: 4, name: "Dicky Nursalim", mntCurrent: 128, mntLast: 52, deltaMnt: -76, hariCurrent: 12, hariLast: 9, deltaHari: -3, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 51.04 },
+          { no: 5, name: "Fahmi Sabila Dinnulhaq", mntCurrent: 16, mntLast: 3, deltaMnt: -13, hariCurrent: 2, hariLast: 0, deltaHari: -2, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 92.26 },
+          { no: 6, name: "Fajar Anugerah Iskandar", mntCurrent: 1, mntLast: 0, deltaMnt: -1, hariCurrent: 0, hariLast: 0, deltaHari: 0, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 99.92 },
+          { no: 7, name: "Fajar Dwi Mardiansyah", mntCurrent: 4, mntLast: 27, deltaMnt: 23, hariCurrent: 1, hariLast: 4, deltaHari: 3, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 96.44 },
+          { no: 8, name: "Fayzal Febriansyah", mntCurrent: 116, mntLast: 169, deltaMnt: 53, hariCurrent: 1, hariLast: 13, deltaHari: 12, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 87.73 },
+          { no: 9, name: "Febrie Zaeni Muchtar", mntCurrent: 33, mntLast: 26, deltaMnt: -7, hariCurrent: 4, hariLast: 3, deltaHari: -1, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 84.43 },
+          { no: 10, name: "Ferddy Fauzan Ramadhan", mntCurrent: 112, mntLast: 296, deltaMnt: 184, hariCurrent: 4, hariLast: 15, deltaHari: 11, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 78.29 },
+          { no: 11, name: "Hari Heryadi", mntCurrent: 99, mntLast: 192, deltaMnt: 93, hariCurrent: 4, hariLast: 11, deltaHari: 7, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 79.3 },
+          { no: 12, name: "Hadiyan Nurdyana", mntCurrent: 346, mntLast: 0, deltaMnt: -346, hariCurrent: 7, hariLast: 0, deltaHari: -7, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 50.34 },
+          { no: 13, name: "Heri Hermawan", mntCurrent: 145, mntLast: 66, deltaMnt: -79, hariCurrent: 5, hariLast: 4, deltaHari: -1, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 72.47 },
+          { no: 14, name: "Ikbal Dwipayana Romli", mntCurrent: 289, mntLast: 830, deltaMnt: 541, hariCurrent: 5, hariLast: 15, deltaHari: 10, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 61.27 },
+          { no: 15, name: "Luthfi Fadle Rynaldy", mntCurrent: 64, mntLast: 95, deltaMnt: 31, hariCurrent: 9, hariLast: 8, deltaHari: -1, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 65.77 },
+          { no: 16, name: "Masrizki Muzakki", mntCurrent: 141, mntLast: 87, deltaMnt: -54, hariCurrent: 6, hariLast: 7, deltaHari: 1, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 69.51 },
+          { no: 17, name: "Mira Nur Asyifa", mntCurrent: 0, mntLast: 23, deltaMnt: 23, hariCurrent: 0, hariLast: 0, deltaHari: 0, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 100.0 },
+          { no: 18, name: "Muhammad Husni Zarkasyi", mntCurrent: 16, mntLast: 23, deltaMnt: 7, hariCurrent: 2, hariLast: 2, deltaHari: 0, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 92.26 },
+          { no: 19, name: "Muhammad Kautsar Alifan Mudzakir", mntCurrent: 91, mntLast: 48, deltaMnt: -43, hariCurrent: 9, hariLast: 3, deltaHari: -6, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 63.67 },
+          { no: 20, name: "Muhammad Zena Firdaus", mntCurrent: 0, mntLast: 74, deltaMnt: 74, hariCurrent: 0, hariLast: 3, deltaHari: 3, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 100.0 },
+          { no: 21, name: "Nizar Muharam", mntCurrent: 289, mntLast: 754, deltaMnt: 465, hariCurrent: 9, hariLast: 15, deltaHari: 6, izin: 1, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 46.27 },
+          { no: 22, name: "Ramdani Pratama Saepudin", mntCurrent: 244, mntLast: 326, deltaMnt: 82, hariCurrent: 11, hariLast: 15, deltaHari: 4, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 45.27 },
+          { no: 23, name: "Rifqi rabbani", mntCurrent: 1, mntLast: 3, deltaMnt: 2, hariCurrent: 0, hariLast: 4, deltaHari: 4, izin: 0, sakit: 3, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 99.92 },
+          { no: 24, name: "Rivaldo Valentino", mntCurrent: 0, mntLast: 0, deltaMnt: 0, hariCurrent: 0, hariLast: 0, deltaHari: 0, izin: 0, sakit: 0, sakitTS: 2, alfa: 0, cuti: 0, wfh: 0, skor: 100.0 },
+          { no: 25, name: "Rizky Agestyas Athallah", mntCurrent: 98, mntLast: 29, deltaMnt: -69, hariCurrent: 6, hariLast: 5, deltaHari: -1, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 72.88 },
+          { no: 26, name: "Suci Rahmah", mntCurrent: 95, mntLast: 33, deltaMnt: -62, hariCurrent: 9, hariLast: 4, deltaHari: -5, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 63.36 },
+          { no: 27, name: "Taufik Dika Permana", mntCurrent: 455, mntLast: 284, deltaMnt: -171, hariCurrent: 15, hariLast: 16, deltaHari: 1, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 16.25 },
+          { no: 28, name: "Yudith Fabillah Arsy Pratama", mntCurrent: 144, mntLast: 132, deltaMnt: -12, hariCurrent: 10, hariLast: 8, deltaHari: -2, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 56.3 }
+        ]
+      },
+      agustus_2026: {
+        id: "agustus_2026",
+        periode: "Agustus 2026",
+        isLocked: true,
+        bulanLaluName: "Juli 2026",
+        totalPegawaiHeader: 33,
+        demographics: {
+          status: [
+            { label: "Direktur", count: 1, pct: 3.03 },
+            { label: "Manager", count: 2, pct: 6.06 },
+            { label: "Karyawan Tetap", count: 11, pct: 33.33 },
+            { label: "Karyawan Kontrak", count: 17, pct: 57.58 },
+            { label: "Probation", count: 0, pct: 0.00 }
+          ],
+          gender: [
+            { label: "Laki Laki", count: 31, pct: 93.94 },
+            { label: "Perempuan", count: 2, pct: 6.06 }
+          ],
+          education: [
+            { label: "SMK/SMA", count: 16, pct: 51.61 },
+            { label: "D3", count: 5, pct: 16.13 },
+            { label: "S1", count: 9, pct: 29.03 },
+            { label: "D4", count: 1, pct: 3.23 }
+          ],
+          position: [
+            { label: "Direktur", count: 1, pct: 3.23 },
+            { label: "Manager", count: 2, pct: 6.45 },
+            { label: "LEAD", count: 4, pct: 12.90 },
+            { label: "STAF", count: 24, pct: 77.42 }
+          ]
+        },
+        attendance: [
+          { no: 1, name: "A. Gymnastiar", mntCurrent: 536, mntLast: 690, deltaMnt: 154, hariCurrent: 12, hariLast: 21, deltaHari: 9, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 26.0 },
+          { no: 2, name: "Ade Mursidin", mntCurrent: 136, mntLast: 1, deltaMnt: -135, hariCurrent: 12, hariLast: 0, deltaHari: -12, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 1, skor: 50.42 },
+          { no: 3, name: "Ade Suharmin", mntCurrent: 163, mntLast: 74, deltaMnt: -89, hariCurrent: 12, hariLast: 6, deltaHari: -6, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 48.32 },
+          { no: 4, name: "Dicky Nursalim", mntCurrent: 22, mntLast: 124, deltaMnt: 102, hariCurrent: 6, hariLast: 15, deltaHari: 9, izin: 1, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 78.79 },
+          { no: 5, name: "Fahmi Sabila Dinnulhaq", mntCurrent: 183, mntLast: 152, deltaMnt: -31, hariCurrent: 3, hariLast: 6, deltaHari: 3, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 76.02 },
+          { no: 6, name: "Fajar Anugerah Iskandar", mntCurrent: 0, mntLast: 0, deltaMnt: 0, hariCurrent: 0, hariLast: 0, deltaHari: 0, izin: 1, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 100.0 },
+          { no: 7, name: "Fajar Dwi Mardiansyah", mntCurrent: 43, mntLast: 2, deltaMnt: -41, hariCurrent: 7, hariLast: 1, deltaHari: -6, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 73.91 },
+          { no: 8, name: "Fayzal Febriansyah", mntCurrent: 112, mntLast: 60, deltaMnt: -52, hariCurrent: 8, hariLast: 5, deltaHari: -3, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 65.29 },
+          { no: 9, name: "Febrie Zaeni Muchtar", mntCurrent: 25, mntLast: 10, deltaMnt: -15, hariCurrent: 2, hariLast: 4, deltaHari: 2, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 91.56 },
+          { no: 10, name: "Ferddy Fauzan Ramadhan", mntCurrent: 566, mntLast: 280, deltaMnt: -286, hariCurrent: 17, hariLast: 5, deltaHari: -12, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 9.75 },
+          { no: 11, name: "Hari Heryadi", mntCurrent: 309, mntLast: 208, deltaMnt: -101, hariCurrent: 9, hariLast: 5, deltaHari: -4, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 46.72 },
+          { no: 12, name: "Hadiyan Nurdyana", mntCurrent: 360, mntLast: 355, deltaMnt: -5, hariCurrent: 12, hariLast: 12, deltaHari: 0, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 33.0 },
+          { no: 13, name: "Heri Hermawan", mntCurrent: 255, mntLast: 81, deltaMnt: -174, hariCurrent: 7, hariLast: 4, deltaHari: -3, izin: 0, sakit: 0, sakitTS: 1, alfa: 0, cuti: 2, wfh: 0, skor: 57.42 },
+          { no: 14, name: "Ikbal Dwipayana Romli", mntCurrent: 510, mntLast: 525, deltaMnt: 15, hariCurrent: 11, hariLast: 8, deltaHari: -3, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 29.25 },
+          { no: 15, name: "Luthfi Fadle Rynaldy", mntCurrent: 65, mntLast: 100, deltaMnt: 35, hariCurrent: 6, hariLast: 7, deltaHari: 1, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 1, skor: 75.44 },
+          { no: 16, name: "Masrizki Muzakki", mntCurrent: 48, mntLast: 38, deltaMnt: -10, hariCurrent: 7, hariLast: 5, deltaHari: -2, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 73.52 },
+          { no: 17, name: "Mira Nur Asyifa", mntCurrent: 14, mntLast: 3, deltaMnt: -11, hariCurrent: 2, hariLast: 1, deltaHari: -1, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 92.41 },
+          { no: 18, name: "Muhammad Husni Zarkasyi", mntCurrent: 45, mntLast: 20, deltaMnt: -25, hariCurrent: 8, hariLast: 3, deltaHari: -5, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 70.5 },
+          { no: 19, name: "Muhammad Kautsar Alifan Mudzakir", mntCurrent: 78, mntLast: 312, deltaMnt: 234, hariCurrent: 6, hariLast: 13, deltaHari: 7, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 74.43 },
+          { no: 20, name: "Nizar Muharam", mntCurrent: 747, mntLast: 856, deltaMnt: 109, hariCurrent: 17, hariLast: 14, deltaHari: -3, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 9.75 },
+          { no: 21, name: "Ramdani Pratama Saepudin", mntCurrent: 532, mntLast: 346, deltaMnt: -186, hariCurrent: 15, hariLast: 12, deltaHari: -3, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 16.25 },
+          { no: 22, name: "Rifqi rabbani", mntCurrent: 0, mntLast: 0, deltaMnt: 0, hariCurrent: 2, hariLast: 0, deltaHari: -2, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 93.5 },
+          { no: 23, name: "Rivaldo Valentino", mntCurrent: 0, mntLast: 12, deltaMnt: 12, hariCurrent: 0, hariLast: 1, deltaHari: 1, izin: 1, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 100.0 },
+          { no: 24, name: "Rizky Agestyas Athallah", mntCurrent: 45, mntLast: 85, deltaMnt: 40, hariCurrent: 5, hariLast: 9, deltaHari: 4, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 2, skor: 80.25 },
+          { no: 25, name: "Suci Rahmah", mntCurrent: 81, mntLast: 30, deltaMnt: -51, hariCurrent: 5, hariLast: 3, deltaHari: -2, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 1, skor: 77.45 },
+          { no: 26, name: "Taufik Dika Permana", mntCurrent: 245, mntLast: 102, deltaMnt: -143, hariCurrent: 12, hariLast: 11, deltaHari: -1, izin: 0, sakit: 0, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 41.94 },
+          { no: 27, name: "Yudith Fabillah Arsy Pratama", mntCurrent: 169, mntLast: 152, deltaMnt: -17, hariCurrent: 9, hariLast: 10, deltaHari: 1, izin: 0, sakit: 1, sakitTS: 0, alfa: 0, cuti: 0, wfh: 0, skor: 57.61 }
+        ]
+      }
+    };
+
+    let allPeriods = defaultPeriods;
+    let currentPeriod = 'juni_2026';
+    let currentLang = 'id';
+    let currentPage = 1;
+    let stagedUploadData = null;
+
+    function renderPeriodSelectors() {
+      const select = document.getElementById('periodSelect');
+      const prevSelect = document.getElementById('modalPrevPeriodSelect');
+      const periodKeys = Object.keys(allPeriods);
+
+      select.innerHTML = periodKeys.map(k => `
+        <option value="${k}" ${k === currentPeriod ? 'selected' : ''}>
+          🔒 ${allPeriods[k].periode} (${allPeriods[k].attendance.length} Pegawai)
+        </option>
+      `).join('');
+
+      prevSelect.innerHTML = `
+        <option value="">-- Gunakan Kolom 'Bulan Lalu' dari File yang Diupload --</option>
+        ${periodKeys.map(k => `
+          <option value="${k}">🔒 ${allPeriods[k].periode} (Baseline Terkunci)</option>
+        `).join('')}
+      `;
+    }
+
+    function calculate(dataset) {
+      const { periode, totalPegawaiHeader, demographics, attendance } = dataset;
+      const totalKehadiran = attendance.length;
+      const totalMntCurrent = attendance.reduce((s, e) => s + (e.mntCurrent || 0), 0);
+      const totalMntLast = attendance.reduce((s, e) => s + (e.mntLast || 0), 0);
+      const diffMnt = totalMntCurrent - totalMntLast;
+      const pctMnt = totalMntLast ? ((diffMnt / totalMntLast) * 100) : 0;
+
+      const totalHariCurrent = attendance.reduce((s, e) => s + (e.hariCurrent || 0), 0);
+      const totalHariLast = attendance.reduce((s, e) => s + (e.hariLast || 0), 0);
+      const diffHari = totalHariCurrent - totalHariLast;
+      const pctHari = totalHariLast ? ((diffHari / totalHariLast) * 100) : 0;
+
+      const avgSkor = totalKehadiran ? (attendance.reduce((s, e) => s + (e.skor || 0), 0) / totalKehadiran) : 0;
+      const countUnder60 = attendance.filter(e => e.skor < 60).length;
+
+      const scoreDist = {
+        ge90: attendance.filter(e => e.skor >= 90).length,
+        b75_90: attendance.filter(e => e.skor >= 75 && e.skor < 90).length,
+        b60_75: attendance.filter(e => e.skor >= 60 && e.skor < 75).length,
+        lt60: attendance.filter(e => e.skor < 60).length
+      };
+
+      const absence = {
+        izin: attendance.reduce((s, e) => s + (e.izin || 0), 0),
+        sakit: attendance.reduce((s, e) => s + (e.sakit || 0), 0),
+        sakitTS: attendance.reduce((s, e) => s + (e.sakitTS || 0), 0),
+        alfa: attendance.reduce((s, e) => s + (e.alfa || 0), 0),
+        cuti: attendance.reduce((s, e) => s + (e.cuti || 0), 0),
+        wfh: attendance.reduce((s, e) => s + (e.wfh || 0), 0)
+      };
+
+      const changesMnt = {
+        membaik: attendance.filter(e => e.deltaMnt > 0).length,
+        memburuk: attendance.filter(e => e.deltaMnt < 0).length,
+        tetap: attendance.filter(e => e.deltaMnt === 0).length
+      };
+
+      const changesHari = {
+        membaik: attendance.filter(e => e.deltaHari > 0).length,
+        memburuk: attendance.filter(e => e.deltaHari < 0).length,
+        tetap: attendance.filter(e => e.deltaHari === 0).length
+      };
+
+      const topPerbaikanMnt = [...attendance].sort((a, b) => b.deltaMnt - a.deltaMnt).slice(0, 5);
+      const topPenurunanMnt = [...attendance].sort((a, b) => a.deltaMnt - b.deltaMnt).slice(0, 5);
+
+      const top5SkorRendah = [...attendance].sort((a, b) => a.skor - b.skor).slice(0, 5);
+      const top5MntTertinggi = [...attendance].sort((a, b) => b.mntCurrent - a.mntCurrent).slice(0, 5);
+      const top5HariTerbanyak = [...attendance].sort((a, b) => b.hariCurrent - a.hariCurrent).slice(0, 5);
+
+      const top3Membaik = [...attendance].sort((a, b) => b.deltaMnt - a.deltaMnt).slice(0, 3);
+      const top3Memburuk = [...attendance].sort((a, b) => a.deltaMnt - b.deltaMnt).slice(0, 3);
+
+      const totalStatus = demographics?.status?.reduce((s, d) => s + d.count, 0) || totalPegawaiHeader;
+
+      return {
+        periode,
+        totalPegawaiHeader,
+        totalKehadiran,
+        totalMntCurrent,
+        totalMntLast,
+        diffMnt,
+        pctMnt,
+        totalHariCurrent,
+        totalHariLast,
+        diffHari,
+        pctHari,
+        avgSkor,
+        countUnder60,
+        scoreDist,
+        absence,
+        changesMnt,
+        changesHari,
+        topPerbaikanMnt,
+        topPenurunanMnt,
+        top5SkorRendah,
+        top5MntTertinggi,
+        top5HariTerbanyak,
+        top3Membaik,
+        top3Memburuk,
+        dataIntegrity: {
+          header: totalPegawaiHeader,
+          demographicsCount: totalStatus,
+          attendanceCount: totalKehadiran,
+          isConsistent: (totalPegawaiHeader === totalStatus && totalStatus === totalKehadiran)
+        },
+        demographics,
+        attendance
+      };
+    }
+
+    function renderSlide(m, page, lang) {
+      const isId = lang === 'id';
+      const fmtNum = (n) => (n === 0 || !n) ? '-' : (isId ? n.toLocaleString('id-ID') : n.toLocaleString('en-US'));
+      const fmtScore = (s) => (s === null || s === undefined) ? '-' : (isId ? Number(s).toFixed(2).replace('.', ',') : Number(s).toFixed(2));
+      const monthShort = m.periode.split(' ')[0];
+
+      const mntTrendWord = m.diffMnt > 0 ? (isId ? "meningkat" : "increased") : (isId ? "menurun" : "decreased");
+      const mntNaikTurun = m.diffMnt > 0 ? (isId ? "naik" : "up") : (isId ? "turun" : "down");
+      const hariTrendWord = m.diffHari > 0 ? (isId ? "meningkat" : "increased") : (isId ? "menurun" : "decreased");
+      const hariNaikTurun = m.diffHari > 0 ? (isId ? "naik" : "up") : (isId ? "turun" : "down");
+      const riskNames = m.top5SkorRendah.map(e => e.name).slice(0, 5).join(", ");
+      const topImprover = m.topPerbaikanMnt[0];
+      const secondImprover = m.topPerbaikanMnt[1];
+
+      const header = (badge, title, subtitle) => `
+        <div class="bg-[#0f1e36] text-white px-8 py-3.5 flex justify-between items-center shrink-0">
+          <div>
+            <div class="text-[10px] font-bold tracking-wider text-slate-300 uppercase">${badge}</div>
+            <h1 class="text-lg font-extrabold tracking-tight">${title}</h1>
+          </div>
+          <div class="text-xs font-semibold text-slate-300">${subtitle}</div>
+        </div>
+      `;
+
+      const footer = (pg) => `
+        <div class="px-8 py-2 border-t border-slate-200 text-[10px] text-slate-400 flex justify-between items-center bg-white shrink-0">
+          <span>Confidential - Internal Management Use</span>
+          <span>Periode ${m.periode} | ${isId ? 'Halaman' : 'Page'} ${pg}</span>
+        </div>
+      `;
+
+      if (page === 1) {
+        return `
+          <div class="slide-page">
+            ${header('EXECUTIVE MANAGEMENT REPORT', isId ? 'LAPORAN KEPEGAWAIAN & KEHADIRAN KARYAWAN' : 'WORKFORCE & ATTENDANCE REPORT', `Periode ${m.periode}`)}
+            <div class="p-5 flex-1 flex flex-col justify-between overflow-hidden bg-slate-50">
+              <div class="grid grid-cols-6 gap-2.5">
+                <div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-xs">
+                  <div class="text-[9px] font-bold text-slate-500 uppercase">${isId ? 'TOTAL PEGAWAI' : 'TOTAL EMPLOYEES'}</div>
+                  <div class="text-2xl font-black text-slate-800 my-0.5">${m.totalPegawaiHeader}</div>
+                  <div class="text-[9px] text-slate-400 font-medium">${isId ? 'Header laporan' : 'Report header'}</div>
+                </div>
+                <div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-xs">
+                  <div class="text-[9px] font-bold text-slate-500 uppercase">${isId ? 'DATA KEHADIRAN' : 'ATTENDANCE DATA'}</div>
+                  <div class="text-2xl font-black text-slate-800 my-0.5">${m.totalKehadiran}</div>
+                  <div class="text-[9px] text-slate-400 font-medium">${isId ? 'Pegawai pada tabel detail' : 'Detail records'}</div>
+                </div>
+                <div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-xs">
+                  <div class="text-[9px] font-bold text-slate-500 uppercase">${isId ? 'MENIT TERLAMBAT' : 'LATE MINUTES'}</div>
+                  <div class="text-2xl font-black text-slate-800 my-0.5">${fmtNum(m.totalMntCurrent)}</div>
+                  <div class="text-[9px] font-bold ${m.diffMnt <= 0 ? 'text-emerald-600' : 'text-rose-600'}">
+                    ${m.diffMnt > 0 ? '+' : ''}${fmtNum(m.diffMnt)} ${isId ? 'vs bulan lalu' : 'vs last mo'}
+                  </div>
+                </div>
+                <div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-xs">
+                  <div class="text-[9px] font-bold text-slate-500 uppercase">${isId ? 'HARI TERLAMBAT' : 'LATE DAYS'}</div>
+                  <div class="text-2xl font-black text-slate-800 my-0.5">${m.totalHariCurrent}</div>
+                  <div class="text-[9px] font-bold ${m.diffHari <= 0 ? 'text-emerald-600' : 'text-rose-600'}">
+                    ${m.diffHari > 0 ? '+' : ''}${m.diffHari} ${isId ? 'vs bulan lalu' : 'vs last mo'}
+                  </div>
+                </div>
+                <div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-xs">
+                  <div class="text-[9px] font-bold text-slate-500 uppercase">${isId ? 'RATA-RATA SKOR' : 'AVG SCORE'}</div>
+                  <div class="text-2xl font-black text-slate-800 my-0.5">${fmtScore(m.avgSkor)}</div>
+                  <div class="text-[9px] text-slate-400 font-medium">${isId ? 'Basis ' + m.totalKehadiran + ' pegawai' : 'Basis ' + m.totalKehadiran + ' staff'}</div>
+                </div>
+                <div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-xs">
+                  <div class="text-[9px] font-bold text-slate-500 uppercase">${isId ? 'SKOR < 60' : 'SCORE < 60'}</div>
+                  <div class="text-2xl font-black ${m.countUnder60 > 0 ? 'text-rose-600' : 'text-emerald-600'} my-0.5">${m.countUnder60}</div>
+                  <div class="text-[9px] text-slate-400 font-medium">${isId ? 'Band analisis dashboard' : 'Risk threshold'}</div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-4 gap-2.5 mt-2.5">
+                <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-xs">
+                  <div class="text-xs font-bold text-slate-800 mb-1.5">${isId ? 'Total Menit Keterlambatan' : 'Total Late Minutes'}</div>
+                  <div class="space-y-1.5 text-[10px]">
+                    <div><div class="flex justify-between text-slate-500"><span>${isId ? 'Bulan lalu' : 'Last month'}</span><span class="font-semibold text-slate-700">${fmtNum(m.totalMntLast)} mnt</span></div><div class="h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 80%"></div></div></div>
+                    <div><div class="flex justify-between text-slate-700 font-semibold"><span>${monthShort}</span><span class="font-bold text-blue-700">${fmtNum(m.totalMntCurrent)} mnt</span></div><div class="h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-blue-600" style="width: ${Math.min(100, Math.round((m.totalMntCurrent/(Math.max(m.totalMntLast, m.totalMntCurrent)||1))*100))}%"></div></div></div>
+                  </div>
+                  <div class="mt-1.5 text-[10px] font-bold ${m.diffMnt <= 0 ? 'text-emerald-600' : 'text-rose-600'}">
+                    ${m.diffMnt <= 0 ? (isId ? 'Membaik' : 'Improved') : (isId ? 'Memburuk' : 'Worsened')}: ${m.diffMnt > 0 ? '+' : ''}${fmtNum(m.diffMnt)} mnt
+                  </div>
+                </div>
+
+                <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-xs">
+                  <div class="text-xs font-bold text-slate-800 mb-1.5">${isId ? 'Total Hari Terlambat' : 'Total Late Days'}</div>
+                  <div class="space-y-1.5 text-[10px]">
+                    <div><div class="flex justify-between text-slate-500"><span>${isId ? 'Bulan lalu' : 'Last month'}</span><span class="font-semibold text-slate-700">${m.totalHariLast} hari</span></div><div class="h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 80%"></div></div></div>
+                    <div><div class="flex justify-between text-slate-700 font-semibold"><span>${monthShort}</span><span class="font-bold text-blue-700">${m.totalHariCurrent} hari</span></div><div class="h-1.5 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-blue-600" style="width: ${Math.min(100, Math.round((m.totalHariCurrent/(Math.max(m.totalHariLast, m.totalHariCurrent)||1))*100))}%"></div></div></div>
+                  </div>
+                  <div class="mt-1.5 text-[10px] font-bold ${m.diffHari <= 0 ? 'text-emerald-600' : 'text-rose-600'}">
+                    ${m.diffHari <= 0 ? (isId ? 'Membaik' : 'Improved') : (isId ? 'Memburuk' : 'Worsened')}: ${m.diffHari > 0 ? '+' : ''}${m.diffHari} hari
+                  </div>
+                </div>
+
+                <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+                  <div class="text-xs font-bold text-slate-800 mb-1">${isId ? 'Distribusi Skor Kehadiran' : 'Score Distribution'}</div>
+                  <div class="flex h-4 rounded overflow-hidden text-[9px] font-bold text-white text-center">
+                    <div style="width: ${(m.scoreDist.ge90/m.totalKehadiran)*100}%; background-color: #10b981;">${m.scoreDist.ge90}</div>
+                    <div style="width: ${(m.scoreDist.b75_90/m.totalKehadiran)*100}%; background-color: #06b6d4;">${m.scoreDist.b75_90}</div>
+                    <div style="width: ${(m.scoreDist.b60_75/m.totalKehadiran)*100}%; background-color: #f59e0b;">${m.scoreDist.b60_75}</div>
+                    <div style="width: ${(m.scoreDist.lt60/m.totalKehadiran)*100}%; background-color: #ef4444;">${m.scoreDist.lt60}</div>
+                  </div>
+                  <div class="grid grid-cols-2 gap-1 text-[9px] text-slate-600 mt-1">
+                    <div><span class="w-1.5 h-1.5 rounded-full bg-emerald-500 inline-block mr-1"></span> >=90: ${m.scoreDist.ge90}</div>
+                    <div><span class="w-1.5 h-1.5 rounded-full bg-cyan-500 inline-block mr-1"></span> 75-89,99: ${m.scoreDist.b75_90}</div>
+                    <div><span class="w-1.5 h-1.5 rounded-full bg-amber-500 inline-block mr-1"></span> 60-74,99: ${m.scoreDist.b60_75}</div>
+                    <div><span class="w-1.5 h-1.5 rounded-full bg-rose-500 inline-block mr-1"></span> &lt;60: ${m.scoreDist.lt60}</div>
+                  </div>
+                </div>
+
+                <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+                  <div class="text-xs font-bold text-slate-800 mb-1">${isId ? 'Ketidakhadiran & WFH' : 'Absence & WFH'}</div>
+                  <div class="grid grid-cols-3 gap-1 text-center">
+                    <div class="bg-amber-50 border border-amber-200/60 rounded p-1"><div class="text-xs font-bold text-amber-700">${m.absence.izin}</div><div class="text-[8px] text-amber-600 font-semibold">${isId ? 'Izin' : 'Permit'}</div></div>
+                    <div class="bg-rose-50 border border-rose-200/60 rounded p-1"><div class="text-xs font-bold text-rose-700">${m.absence.sakit}</div><div class="text-[8px] text-rose-600 font-semibold">${isId ? 'Sakit' : 'Sick'}</div></div>
+                    <div class="bg-purple-50 border border-purple-200/60 rounded p-1"><div class="text-xs font-bold text-purple-700">${m.absence.sakitTS}</div><div class="text-[8px] text-purple-600 font-semibold leading-tight">${isId ? 'Sakit TS' : 'No Note'}</div></div>
+                    <div class="bg-slate-50 border border-slate-200/60 rounded p-1"><div class="text-xs font-bold text-slate-700">${m.absence.alfa}</div><div class="text-[8px] text-slate-500 font-semibold">${isId ? 'Alfa' : 'Unexcused'}</div></div>
+                    <div class="bg-blue-50 border border-blue-200/60 rounded p-1"><div class="text-xs font-bold text-blue-700">${m.absence.cuti}</div><div class="text-[8px] text-blue-600 font-semibold">${isId ? 'Cuti' : 'Leave'}</div></div>
+                    <div class="bg-emerald-50 border border-emerald-200/60 rounded p-1"><div class="text-xs font-bold text-emerald-700">${m.absence.wfh}</div><div class="text-[8px] text-emerald-600 font-semibold">WFH</div></div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-xs mt-2.5 flex-1">
+                <h3 class="text-xs font-bold text-slate-900 mb-1.5 flex items-center gap-1.5">
+                  <span class="w-1.5 h-3 bg-blue-600 rounded-xs"></span>
+                  ${isId ? 'Executive Summary - Fokus Direksi' : 'Executive Summary - Board Focus'}
+                </h3>
+                <div class="grid grid-cols-2 gap-x-5 gap-y-1 text-[10.5px] text-slate-700 leading-relaxed">
+                  <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>${isId ? `Keterlambatan ${m.periode} ${mntTrendWord} dari ${fmtNum(m.totalMntLast)} menjadi ${fmtNum(m.totalMntCurrent)} menit: ${mntNaikTurun} ${fmtNum(Math.abs(m.diffMnt))} menit (${Math.abs(m.pctMnt).toFixed(1).replace('.', ',')}%).` : `Lateness ${mntTrendWord} to ${fmtNum(m.totalMntCurrent)} min.`}</span></div>
+                  <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>${isId ? `Frekuensi keterlambatan ${hariTrendWord} dari ${m.totalHariLast} menjadi ${m.totalHariCurrent} hari: ${hariNaikTurun} ${Math.abs(m.diffHari)} hari (${Math.abs(m.pctHari).toFixed(1).replace('.', ',')}%).` : `Lateness frequency ${hariTrendWord} to ${m.totalHariCurrent} days.`}</span></div>
+                  <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>${isId ? `Dari ${m.totalKehadiran} pegawai pada detail kehadiran, ${m.scoreDist.ge90} memiliki skor >=90 dan ${m.countUnder60} memiliki skor <60.` : `${m.scoreDist.ge90} scored >=90, ${m.countUnder60} scored <60.`}</span></div>
+                  <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>${isId ? `Risiko tertinggi terkonsentrasi pada ${riskNames}.` : `Highest risk on ${riskNames}.`}</span></div>
+                  <div class="flex items-start gap-1.5 col-span-2"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>${isId ? `Cakupan data: header ${m.dataIntegrity.header} pegawai, profil demografi ${m.dataIntegrity.demographicsCount} pegawai, dan detail kehadiran ${m.totalKehadiran} pegawai.` : `Data scope: header ${m.dataIntegrity.header}, profile ${m.dataIntegrity.demographicsCount}, attendance ${m.totalKehadiran}.`}</span></div>
+                </div>
+              </div>
+
+              <div class="grid grid-cols-3 gap-2.5 mt-2.5">
+                <div class="${m.diffMnt > 0 ? 'bg-rose-50 border-rose-200' : 'bg-emerald-50 border-emerald-200'} border rounded-lg p-2 flex items-center justify-between">
+                  <div><div class="text-xs font-black ${m.diffMnt > 0 ? 'text-rose-700' : 'text-emerald-700'} uppercase">${m.diffMnt > 0 ? (isId ? 'MEMBURUK' : 'WORSENED') : (isId ? 'MEMBAIK' : 'IMPROVED')}</div><div class="text-[9px] font-bold text-slate-500">${isId ? 'TREND KESELURUHAN' : 'OVERALL TREND'}</div></div>
+                  <div class="text-[10px] font-semibold text-slate-700">Menit ${m.diffMnt > 0 ? '+' : ''}${m.pctMnt.toFixed(1).replace('.', ',')}% | Hari ${m.diffHari > 0 ? '+' : ''}${m.pctHari.toFixed(1).replace('.', ',')}%</div>
+                </div>
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-2 flex items-center justify-between">
+                  <div><div class="text-xs font-black text-amber-700 uppercase">${m.countUnder60} ${isId ? 'PEGAWAI' : 'STAFF'}</div><div class="text-[9px] font-bold text-slate-500">${isId ? 'KELOMPOK RISIKO' : 'RISK GROUP'}</div></div>
+                  <div class="text-[10px] font-semibold text-slate-700">Skor &lt; 60 dari ${m.totalKehadiran} pegawai</div>
+                </div>
+                <div class="bg-slate-100 border border-slate-200 rounded-lg p-2 flex items-center justify-between">
+                  <div><div class="text-xs font-black text-slate-800">${m.dataIntegrity.header} / ${m.dataIntegrity.demographicsCount} / ${m.totalKehadiran}</div><div class="text-[9px] font-bold text-slate-500">${isId ? 'INTEGRITAS DATA' : 'DATA INTEGRITY'}</div></div>
+                  <div class="text-[10px] font-semibold text-slate-600">${m.dataIntegrity.isConsistent ? (isId ? 'Basis data konsisten' : 'Data consistent') : (isId ? 'Basis data belum konsisten' : 'Basis inconsistent')}</div>
+                </div>
+              </div>
+            </div>
+            ${footer(1)}
+          </div>
+        `;
+      }
+
+      if (page === 2) {
+        return `
+          <div class="slide-page">
+            ${header('WORKFORCE PROFILE', isId ? 'PROFIL PEGAWAI' : 'EMPLOYEE PROFILE', isId ? 'Komposisi sesuai data pada PDF sumber' : 'Source composition')}
+            <div class="p-5 flex-1 flex flex-col justify-between overflow-hidden bg-slate-50">
+              <div class="grid grid-cols-2 gap-3.5 flex-1">
+                <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+                  <div class="text-xs font-bold text-slate-800 mb-1.5">${isId ? 'Status Pegawai' : 'Status'}</div>
+                  <div class="space-y-2 text-[10px]">
+                    ${(m.demographics?.status || []).map(item => `
+                      <div>
+                        <div class="flex justify-between text-slate-600 mb-0.5"><span class="font-medium">${item.label}</span><span class="font-semibold text-slate-800">${item.count} | ${item.pct.toFixed(2).replace('.', ',')}%</span></div>
+                        <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-blue-600 rounded-full" style="width: ${item.pct}%"></div></div>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+                <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+                  <div class="text-xs font-bold text-slate-800 mb-1.5">${isId ? 'Jenis Kelamin' : 'Gender'}</div>
+                  <div class="space-y-3 text-[10px]">
+                    ${(m.demographics?.gender || []).map(item => `
+                      <div>
+                        <div class="flex justify-between text-slate-600 mb-0.5"><span class="font-medium">${item.label}</span><span class="font-semibold text-slate-800">${item.count} | ${item.pct.toFixed(2).replace('.', ',')}%</span></div>
+                        <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-blue-600 rounded-full" style="width: ${item.pct}%"></div></div>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+                <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+                  <div class="text-xs font-bold text-slate-800 mb-1.5">${isId ? 'Pendidikan' : 'Education'}</div>
+                  <div class="space-y-2 text-[10px]">
+                    ${(m.demographics?.education || []).map(item => `
+                      <div>
+                        <div class="flex justify-between text-slate-600 mb-0.5"><span class="font-medium">${item.label}</span><span class="font-semibold text-slate-800">${item.count} | ${item.pct.toFixed(2).replace('.', ',')}%</span></div>
+                        <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-blue-600 rounded-full" style="width: ${item.pct}%"></div></div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+            <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+              <div class="text-xs font-bold text-slate-800 mb-1.5">${isId ? 'Jabatan' : 'Position'}</div>
+              <div class="space-y-2 text-[10px]">
+                ${(m.demographics?.position || []).map(item => `
+                  <div>
+                    <div class="flex justify-between text-slate-600 mb-0.5"><span class="font-medium">${item.label}</span><span class="font-semibold text-slate-800">${item.count} | ${item.pct.toFixed(2).replace('.', ',')}%</span></div>
+                    <div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-blue-600 rounded-full" style="width: ${item.pct}%"></div></div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </div>
+          <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-xs mt-3 shrink-0">
+            <h3 class="text-xs font-bold text-slate-900 mb-1.5 flex items-center gap-1.5"><span class="w-1.5 h-3 bg-blue-600 rounded-xs"></span>${isId ? 'Catatan Validasi Data Profil' : 'Validation Notes'}</h3>
+            <div class="grid grid-cols-2 gap-3 text-[10px] text-slate-700 leading-relaxed">
+              <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>Header dan tabel jenis kelamin mencatat ${m.dataIntegrity.header} pegawai.</span></div>
+              <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>Tabel status, pendidikan, dan jabatan masing-masing berjumlah ${m.dataIntegrity.demographicsCount} pegawai.</span></div>
+            </div>
+          </div>
+        </div>
+        ${footer(2)}
+      </div>
+    `;
+  }
+
+  if (page === 3) {
+    return `
+      <div class="slide-page">
+        ${header('ATTENDANCE ANALYTICS', isId ? 'ANALISIS KEHADIRAN & KETERLAMBATAN' : 'ATTENDANCE & LATENESS ANALYSIS', `${m.periode} ${isId ? 'dibanding bulan lalu' : 'vs last mo'}`)}
+        <div class="p-5 flex-1 flex flex-col justify-between overflow-hidden bg-slate-50">
+          <div class="grid grid-cols-3 gap-2.5">
+            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-xs">
+              <div class="text-xs font-bold text-slate-800 mb-1.5">${isId ? 'Perbandingan Menit Terlambat' : 'Late Minutes'}</div>
+              <div class="space-y-1.5 text-[10px]">
+                <div><div class="flex justify-between text-slate-500"><span>${isId ? 'Bulan lalu' : 'Last mo'}</span><span class="font-semibold text-slate-700">${fmtNum(m.totalMntLast)} mnt</span></div><div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 80%"></div></div></div>
+                <div><div class="flex justify-between text-slate-700 font-semibold"><span>${monthShort}</span><span class="font-bold text-blue-700">${fmtNum(m.totalMntCurrent)} mnt</span></div><div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-blue-600" style="width: ${Math.min(100, Math.round((m.totalMntCurrent/(Math.max(m.totalMntLast, m.totalMntCurrent)||1))*100))}%"></div></div></div>
+              </div>
+              <div class="mt-1.5 text-[10px] font-bold ${m.diffMnt <= 0 ? 'text-emerald-600' : 'text-rose-600'}">${m.diffMnt <= 0 ? 'Membaik' : 'Memburuk'}: ${m.diffMnt > 0 ? '+' : ''}${fmtNum(m.diffMnt)} mnt</div>
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-xs">
+              <div class="text-xs font-bold text-slate-800 mb-1.5">${isId ? 'Perbandingan Hari Terlambat' : 'Late Days'}</div>
+              <div class="space-y-1.5 text-[10px]">
+                <div><div class="flex justify-between text-slate-500"><span>${isId ? 'Bulan lalu' : 'Last mo'}</span><span class="font-semibold text-slate-700">${m.totalHariLast} hari</span></div><div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-slate-400" style="width: 80%"></div></div></div>
+                <div><div class="flex justify-between text-slate-700 font-semibold"><span>${monthShort}</span><span class="font-bold text-blue-700">${m.totalHariCurrent} hari</span></div><div class="h-2 bg-slate-100 rounded-full overflow-hidden"><div class="h-full bg-blue-600" style="width: ${Math.min(100, Math.round((m.totalHariCurrent/(Math.max(m.totalHariLast, m.totalHariCurrent)||1))*100))}%"></div></div></div>
+              </div>
+              <div class="mt-1.5 text-[10px] font-bold ${m.diffHari <= 0 ? 'text-emerald-600' : 'text-rose-600'}">${m.diffHari <= 0 ? 'Membaik' : 'Memburuk'}: ${m.diffHari > 0 ? '+' : ''}${m.diffHari} hari</div>
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-xs">
+              <div class="text-xs font-bold text-slate-800 mb-1.5">${isId ? 'Perubahan per Pegawai - Menit' : 'Change - Minutes'}</div>
+              <div class="space-y-1 text-[10px]">
+                <div class="flex justify-between"><span class="text-slate-600">Membaik</span><span class="font-bold text-emerald-600">${m.changesMnt.membaik}</span></div>
+                <div class="flex justify-between"><span class="text-slate-600">Memburuk</span><span class="font-bold text-rose-600">${m.changesMnt.memburuk}</span></div>
+                <div class="flex justify-between"><span class="text-slate-600">Tetap</span><span class="font-bold text-slate-600">${m.changesMnt.tetap}</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2.5 mt-2.5">
+            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+              <div class="text-xs font-bold text-slate-800 mb-1.5">${isId ? 'Perubahan per Pegawai - Hari' : 'Change - Days'}</div>
+              <div class="space-y-1 text-[10px]">
+                <div class="flex justify-between"><span class="text-slate-600">Membaik</span><span class="font-bold text-emerald-600">${m.changesHari.membaik}</span></div>
+                <div class="flex justify-between"><span class="text-slate-600">Memburuk</span><span class="font-bold text-rose-600">${m.changesHari.memburuk}</span></div>
+                <div class="flex justify-between"><span class="text-slate-600">Tetap</span><span class="font-bold text-slate-600">${m.changesHari.tetap}</span></div>
+              </div>
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-xs">
+              <div class="text-xs font-bold text-slate-800 mb-1">Perbaikan Menit Terbesar</div>
+              <table class="w-full text-[9.5px]"><thead><tr class="bg-slate-800 text-white"><th class="p-1 text-left rounded-l">No</th><th class="p-1 text-left">Nama</th><th class="p-1 text-right rounded-r">(+/-)</th></tr></thead><tbody class="divide-y divide-slate-100">
+                ${m.topPerbaikanMnt.map((e, idx) => `<tr><td class="p-1 text-slate-400">${idx+1}</td><td class="p-1 font-medium truncate max-w-[110px]">${e.name}</td><td class="p-1 text-right font-bold text-emerald-600">+${e.deltaMnt}</td></tr>`).join('')}
+              </tbody></table>
+            </div>
+            <div class="bg-white p-2.5 rounded-lg border border-slate-200 shadow-xs">
+              <div class="text-xs font-bold text-slate-800 mb-1">Penurunan Menit Terbesar</div>
+              <table class="w-full text-[9.5px]"><thead><tr class="bg-slate-800 text-white"><th class="p-1 text-left rounded-l">No</th><th class="p-1 text-left">Nama</th><th class="p-1 text-right rounded-r">(+/-)</th></tr></thead><tbody class="divide-y divide-slate-100">
+                ${m.topPenurunanMnt.map((e, idx) => `<tr><td class="p-1 text-slate-400">${idx+1}</td><td class="p-1 font-medium truncate max-w-[110px]">${e.name}</td><td class="p-1 text-right font-bold text-rose-600">${e.deltaMnt}</td></tr>`).join('')}
+              </tbody></table>
+            </div>
+          </div>
+
+          <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-xs mt-2.5 flex-1">
+            <h3 class="text-xs font-bold text-slate-900 mb-1 flex items-center gap-1.5"><span class="w-1.5 h-3 bg-blue-600 rounded-xs"></span>Interpretasi Analisis</h3>
+            <div class="space-y-1 text-[10.5px] text-slate-700 leading-relaxed">
+              <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>Kolom (+/-) adalah Bulan Lalu - ${m.periode}: nilai positif berarti keterlambatan menurun (membaik), nilai negatif berarti meningkat (memburuk).</span></div>
+              <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>Secara total, ${m.periode} ${m.diffMnt > 0 ? "memburuk" : "membaik"} ${Math.abs(m.pctMnt).toFixed(1).replace('.', ',')}% pada menit keterlambatan dan ${m.diffHari > 0 ? "memburuk" : "membaik"} ${Math.abs(m.pctHari).toFixed(1).replace('.', ',')}% pada jumlah hari terlambat.</span></div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-3 gap-2.5 mt-2.5">
+            <div class="bg-slate-100 border border-slate-200 rounded-lg p-2 flex items-center justify-between"><div><div class="text-xs font-black ${m.changesMnt.memburuk > m.changesMnt.membaik ? 'text-rose-700' : 'text-emerald-700'}">${m.changesMnt.memburuk > m.changesMnt.membaik ? m.changesMnt.memburuk + ' MEMBURUK' : m.changesMnt.membaik + ' MEMBAIK'}</div><div class="text-[9px] font-bold text-slate-500">PERUBAHAN MENIT</div></div><div class="text-[10px] font-semibold text-slate-600">${m.changesMnt.membaik} membaik | ${m.changesMnt.tetap} tetap</div></div>
+            <div class="bg-slate-100 border border-slate-200 rounded-lg p-2 flex items-center justify-between"><div><div class="text-xs font-black ${m.changesHari.memburuk > m.changesHari.membaik ? 'text-rose-700' : 'text-emerald-700'}">${m.changesHari.memburuk > m.changesHari.membaik ? m.changesHari.memburuk + ' MEMBURUK' : m.changesHari.membaik + ' MEMBAIK'}</div><div class="text-[9px] font-bold text-slate-500">PERUBAHAN HARI</div></div><div class="text-[10px] font-semibold text-slate-600">${m.changesHari.membaik} membaik | ${m.changesHari.tetap} tetap</div></div>
+            <div class="bg-slate-100 border border-slate-200 rounded-lg p-2 flex items-center justify-between"><div><div class="text-xs font-black ${m.diffMnt > 0 ? 'text-rose-700' : 'text-emerald-700'}">${m.diffMnt > 0 ? 'NEGATIF' : 'POSITIF'}</div><div class="text-[9px] font-bold text-slate-500">KESIMPULAN TREN</div></div><div class="text-[10px] font-semibold text-slate-600">${m.diffMnt > 0 ? 'Lebih buruk dari bln lalu' : 'Lebih baik dari bln lalu'}</div></div>
+          </div>
+        </div>
+        ${footer(3)}
+      </div>
+    `;
+  }
+
+  if (page === 4) {
+    return `
+      <div class="slide-page">
+        ${header('RISK MONITORING', 'EMPLOYEE ATTENDANCE RISK', 'Prioritas monitoring berbasis skor, menit, dan frekuensi')}
+        <div class="p-5 flex-1 flex flex-col justify-between overflow-hidden bg-slate-50">
+          <div class="grid grid-cols-2 gap-3.5 flex-1">
+            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+              <div class="text-xs font-bold text-slate-800 mb-1">5 Skor Kehadiran Terendah</div>
+              <table class="w-full text-[9.5px]"><thead><tr class="bg-slate-800 text-white"><th class="p-1 text-left rounded-l">No</th><th class="p-1 text-left">Nama</th><th class="p-1 text-center">Skor</th><th class="p-1 text-center">Menit</th><th class="p-1 text-center rounded-r">Hari</th></tr></thead><tbody class="divide-y divide-slate-100">
+                ${m.top5SkorRendah.map((e, idx) => `<tr><td class="p-1 text-slate-400">${idx+1}</td><td class="p-1 font-medium truncate max-w-[130px]">${e.name}</td><td class="p-1 text-center font-bold text-rose-600 bg-rose-50/50">${fmtScore(e.skor)}</td><td class="p-1 text-center">${e.mntCurrent}</td><td class="p-1 text-center">${e.hariCurrent}</td></tr>`).join('')}
+              </tbody></table>
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+              <div class="text-xs font-bold text-slate-800 mb-1">5 Menit Keterlambatan Tertinggi</div>
+              <table class="w-full text-[9.5px]"><thead><tr class="bg-slate-800 text-white"><th class="p-1 text-left rounded-l">No</th><th class="p-1 text-left">Nama</th><th class="p-1 text-center">Menit</th><th class="p-1 text-center">Hari</th><th class="p-1 text-center rounded-r">Skor</th></tr></thead><tbody class="divide-y divide-slate-100">
+                ${m.top5MntTertinggi.map((e, idx) => `<tr><td class="p-1 text-slate-400">${idx+1}</td><td class="p-1 font-medium truncate max-w-[130px]">${e.name}</td><td class="p-1 text-center font-bold text-slate-800">${e.mntCurrent}</td><td class="p-1 text-center">${e.hariCurrent}</td><td class="p-1 text-center font-semibold">${fmtScore(e.skor)}</td></tr>`).join('')}
+              </tbody></table>
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+              <div class="text-xs font-bold text-slate-800 mb-1">5 Hari Terlambat Terbanyak</div>
+              <table class="w-full text-[9.5px]"><thead><tr class="bg-slate-800 text-white"><th class="p-1 text-left rounded-l">No</th><th class="p-1 text-left">Nama</th><th class="p-1 text-center">Hari</th><th class="p-1 text-center">Menit</th><th class="p-1 text-center rounded-r">Skor</th></tr></thead><tbody class="divide-y divide-slate-100">
+                ${m.top5HariTerbanyak.map((e, idx) => `<tr><td class="p-1 text-slate-400">${idx+1}</td><td class="p-1 font-medium truncate max-w-[130px]">${e.name}</td><td class="p-1 text-center font-bold text-slate-800">${e.hariCurrent}</td><td class="p-1 text-center">${e.mntCurrent}</td><td class="p-1 text-center font-semibold">${fmtScore(e.skor)}</td></tr>`).join('')}
+              </tbody></table>
+            </div>
+            <div class="bg-white p-3 rounded-lg border border-slate-200 shadow-xs flex flex-col justify-between">
+              <div class="text-xs font-bold text-slate-800 mb-1">Perubahan Paling Signifikan</div>
+              <table class="w-full text-[9.5px]"><thead><tr class="bg-slate-800 text-white"><th class="p-1 text-left rounded-l">Status</th><th class="p-1 text-left">Nama</th><th class="p-1 text-right rounded-r">Perubahan</th></tr></thead><tbody class="divide-y divide-slate-100">
+                ${m.top3Membaik.map(e => `<tr><td class="p-1"><span class="px-1 py-0.5 rounded text-[8.5px] font-bold bg-emerald-100 text-emerald-800">Membaik</span></td><td class="p-1 font-medium truncate max-w-[130px]">${e.name}</td><td class="p-1 text-right font-bold text-emerald-600">+${e.deltaMnt} mnt</td></tr>`).join('')}
+                ${m.top3Memburuk.map(e => `<tr><td class="p-1"><span class="px-1 py-0.5 rounded text-[8.5px] font-bold bg-rose-100 text-rose-800">Memburuk</span></td><td class="p-1 font-medium truncate max-w-[130px]">${e.name}</td><td class="p-1 text-right font-bold text-rose-600">${e.deltaMnt} mnt</td></tr>`).join('')}
+              </tbody></table>
+            </div>
+          </div>
+          <div class="bg-white p-3.5 rounded-lg border border-slate-200 shadow-xs mt-3 shrink-0">
+            <h3 class="text-xs font-bold text-slate-900 mb-1.5 flex items-center gap-1.5"><span class="w-1.5 h-3 bg-blue-600 rounded-xs"></span>Risk Interpretation</h3>
+            <div class="grid grid-cols-2 gap-3 text-[10px] text-slate-700 leading-relaxed">
+              <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>Prioritas monitoring utama adalah pegawai yang muncul bersamaan pada skor rendah dan daftar menit/hari keterlambatan tertinggi.</span></div>
+              <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>${m.top5SkorRendah[0]?.name} dan ${m.top5SkorRendah[1]?.name} memiliki skor terendah serta akumulasi keterlambatan yang memerlukan bimbingan.</span></div>
+            </div>
+          </div>
+        </div>
+        ${footer(4)}
+      </div>
+    `;
+  }
+
+  if (page === 5) {
+    return `
+      <div class="slide-page">
+        ${header('MANAGEMENT REVIEW', 'MANAGEMENT INSIGHT & RECOMMENDATION', 'Ringkasan keputusan untuk Direksi')}
+        <div class="p-5 flex-1 flex flex-col justify-between overflow-hidden bg-slate-50">
+          <div class="grid grid-cols-2 gap-4 flex-1">
+            <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-xs flex flex-col">
+              <h3 class="text-xs font-bold text-slate-900 mb-2.5 flex items-center gap-1.5"><span class="w-1.5 h-3 bg-blue-600 rounded-xs"></span>Management Insight</h3>
+              <div class="space-y-2 text-[10.5px] text-slate-700 leading-relaxed flex-1">
+                <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>Disiplin kehadiran secara agregat ${m.diffMnt > 0 ? "memburuk" : "membaik"}: total menit ${mntNaikTurun} ${fmtNum(Math.abs(m.diffMnt))} (${Math.abs(m.pctMnt).toFixed(1).replace('.', ',')}%) dan total hari terlambat ${hariNaikTurun} ${Math.abs(m.diffHari)} (${Math.abs(m.pctHari).toFixed(1).replace('.', ',')}%).</span></div>
+                <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>Sebanyak ${m.countUnder60} dari ${m.totalKehadiran} pegawai berada pada band skor <60; ${m.scoreDist.ge90} berada pada skor >=90.</span></div>
+                <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>Risiko paling jelas terdapat pada ${riskNames} berdasarkan kombinasi skor rendah dan keterlambatan tinggi.</span></div>
+                <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>${topImprover?.name} menunjukkan perbaikan menit terbesar (+${topImprover?.deltaMnt}), disusul ${secondImprover?.name} (+${secondImprover?.deltaMnt}).</span></div>
+                <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-blue-600 shrink-0 mt-1"></span><span>Ketidakhadiran yang tercatat: izin ${m.absence.izin}, sakit ${m.absence.sakit}, sakit tanpa surat ${m.absence.sakitTS}, alfa ${m.absence.alfa}, cuti ${m.absence.cuti}, WFH ${m.absence.wfh}.</span></div>
+              </div>
+            </div>
+
+            <div class="bg-white p-4 rounded-lg border border-slate-200 shadow-xs flex flex-col">
+              <h3 class="text-xs font-bold text-slate-900 mb-2.5 flex items-center gap-1.5"><span class="w-1.5 h-3 bg-emerald-600 rounded-xs"></span>Recommended Management Actions</h3>
+              <div class="space-y-2 text-[10.5px] text-slate-700 leading-relaxed flex-1">
+                <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0 mt-1"></span><span>Tetapkan monitoring bulanan untuk pegawai dengan skor <60 dan review kembali hasilnya pada periode berikutnya.</span></div>
+                <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0 mt-1"></span><span>Lakukan coaching atau klarifikasi penyebab bagi pegawai yang mengalami penurunan besar pada menit maupun frekuensi keterlambatan.</span></div>
+                <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0 mt-1"></span><span>Bedakan pendekatan antara masalah durasi keterlambatan dan frekuensi keterlambatan agar tindak lanjut lebih tepat.</span></div>
+                <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0 mt-1"></span><span>Pantau keberlanjutan perbaikan pada pegawai dengan nilai (+/-) positif besar agar tren membaik tidak hanya bersifat sementara.</span></div>
+                <div class="flex items-start gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-emerald-600 shrink-0 mt-1"></span><span>Lakukan rekonsiliasi data pegawai sebelum laporan digunakan sebagai dasar keputusan formal demi akurasi menyeluruh.</span></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-[#0f1e36] text-white p-4 rounded-lg shadow-md mt-3.5 shrink-0">
+            <div class="text-[9px] font-bold text-sky-400 tracking-wider uppercase mb-1">EXECUTIVE CONCLUSION</div>
+            <div class="text-sm font-extrabold tracking-tight mb-1.5">
+              ${m.diffMnt > 0 ? `${m.periode} menunjukkan penurunan disiplin kehadiran yang perlu perhatian manajemen.` : `${m.periode} menunjukkan perbaikan kedisiplinan kehadiran dengan penurunan total durasi keterlambatan.`}
+            </div>
+            <div class="text-[10px] text-slate-300 space-y-0.5 leading-relaxed">
+              <p>Prioritas keputusan: monitoring pegawai berisiko, klarifikasi penyebab keterlambatan, dan evaluasi hasil perbaikan pada periode berikutnya.</p>
+              <p class="text-slate-400">Sebelum tindakan formal, konsistensi cakupan data pegawai perlu direkonsiliasi agar basis keputusan Direksi sama.</p>
+            </div>
+          </div>
+        </div>
+        ${footer(5)}
+      </div>
+    `;
+  }
+
+  if (page === 6) {
+    return `
+      <div class="slide-page">
+        ${header('APPENDIX', 'DETAIL DATA KEHADIRAN PEGAWAI', "Nilai 0 ditampilkan sebagai '-' untuk meningkatkan keterbacaan")}
+        <div class="p-5 flex-1 flex flex-col justify-between overflow-hidden bg-slate-50">
+          <div class="bg-white rounded-lg border border-slate-200 shadow-xs overflow-hidden flex-1 flex flex-col">
+            <div class="overflow-y-auto flex-1">
+              <table class="w-full text-[9px] border-collapse">
+                <thead class="sticky top-0 bg-slate-800 text-white font-semibold">
+                  <tr>
+                    <th class="py-1 px-1 text-center border-r border-slate-700 w-6">No</th>
+                    <th class="py-1 px-2 text-left border-r border-slate-700 min-w-[130px]">Nama</th>
+                    <th class="py-1 px-1 text-center border-r border-slate-700">Mnt ${monthShort}</th>
+                    <th class="py-1 px-1 text-center border-r border-slate-700">Mnt Lalu</th>
+                    <th class="py-1 px-1 text-center border-r border-slate-700 bg-slate-700 font-bold">(+/-)</th>
+                    <th class="py-1 px-1 text-center border-r border-slate-700">Hari ${monthShort}</th>
+                    <th class="py-1 px-1 text-center border-r border-slate-700">Hari Lalu</th>
+                    <th class="py-1 px-1 text-center border-r border-slate-700 bg-slate-700 font-bold">(+/-)</th>
+                    <th class="py-1 px-1 text-center border-r border-slate-700">Izin</th>
+                    <th class="py-1 px-1 text-center border-r border-slate-700">Sakit</th>
+                    <th class="py-1 px-1 text-center border-r border-slate-700">Sakit TS</th>
+                    <th class="py-1 px-1 text-center border-r border-slate-700">Alfa</th>
+                    <th class="py-1 px-1 text-center border-r border-slate-700">Cuti</th>
+                    <th class="py-1 px-1 text-center border-r border-slate-700">WFH</th>
+                    <th class="py-1 px-1.5 text-center bg-slate-900 font-black">Skor</th>
+                  </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100 text-slate-700">
+                  ${m.attendance.map((e, idx) => `
+                    <tr class="${idx % 2 === 1 ? 'bg-slate-50/70' : 'bg-white'} hover:bg-blue-50/40">
+                      <td class="py-0.5 px-1 text-center text-slate-400 border-r border-slate-100">${e.no || (idx+1)}</td>
+                      <td class="py-0.5 px-2 font-medium text-slate-800 border-r border-slate-100 truncate max-w-[130px]">${e.name}</td>
+                      <td class="py-0.5 px-1 text-center border-r border-slate-100">${fmtNum(e.mntCurrent)}</td>
+                      <td class="py-0.5 px-1 text-center border-r border-slate-100">${fmtNum(e.mntLast)}</td>
+                      <td class="py-0.5 px-1 text-center font-bold border-r border-slate-100 ${e.deltaMnt > 0 ? 'text-emerald-600 bg-emerald-50/30' : (e.deltaMnt < 0 ? 'text-rose-600 bg-rose-50/30' : 'text-slate-400')}">
+                        ${e.deltaMnt > 0 ? '+' : ''}${e.deltaMnt === 0 ? '-' : e.deltaMnt}
+                      </td>
+                      <td class="py-0.5 px-1 text-center border-r border-slate-100">${fmtNum(e.hariCurrent)}</td>
+                      <td class="py-0.5 px-1 text-center border-r border-slate-100">${fmtNum(e.hariLast)}</td>
+                      <td class="py-0.5 px-1 text-center font-bold border-r border-slate-100 ${e.deltaHari > 0 ? 'text-emerald-600 bg-emerald-50/30' : (e.deltaHari < 0 ? 'text-rose-600 bg-rose-50/30' : 'text-slate-400')}">
+                        ${e.deltaHari > 0 ? '+' : ''}${e.deltaHari === 0 ? '-' : e.deltaHari}
+                      </td>
+                      <td class="py-0.5 px-1 text-center border-r border-slate-100">${fmtNum(e.izin)}</td>
+                      <td class="py-0.5 px-1 text-center border-r border-slate-100">${fmtNum(e.sakit)}</td>
+                      <td class="py-0.5 px-1 text-center border-r border-slate-100">${fmtNum(e.sakitTS)}</td>
+                      <td class="py-0.5 px-1 text-center border-r border-slate-100">${fmtNum(e.alfa)}</td>
+                      <td class="py-0.5 px-1 text-center border-r border-slate-100">${fmtNum(e.cuti)}</td>
+                      <td class="py-0.5 px-1 text-center border-r border-slate-100">${fmtNum(e.wfh)}</td>
+                      <td class="py-0.5 px-1.5 text-center font-bold ${e.skor < 60 ? 'text-rose-600 bg-rose-50/50' : (e.skor >= 90 ? 'text-emerald-600' : 'text-slate-800')}">
+                        ${fmtScore(e.skor)}
+                      </td>
+                    </tr>
+                  `).join('')}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="mt-1.5 text-[9px] text-slate-500 font-medium">Keterangan (+/-): Bulan Lalu - ${m.periode}. Positif = membaik; negatif = memburuk.</div>
+        </div>
+        ${footer(6)}
+      </div>
+    `;
+  }
+}
+
+function updateView() {
+  const data = allPeriods[currentPeriod] || defaultPeriods.juni_2026;
+  const metrics = calculate(data);
+  document.getElementById('currentPeriodLabel').textContent = metrics.periode;
+  document.getElementById('slideContent').innerHTML = renderSlide(metrics, currentPage, currentLang);
+  document.getElementById('pageIndicator').textContent = `${currentPage} / 6`;
+
+  for (let i = 1; i <= 6; i++) {
+    const btn = document.getElementById(`tabBtn${i}`);
+    if (i === currentPage) {
+      btn.className = "page-tab px-3 py-1.5 rounded-md font-semibold text-white bg-blue-600 shadow-sm transition";
+    } else {
+      btn.className = "page-tab px-3 py-1.5 rounded-md font-medium text-slate-300 hover:bg-slate-700/50 transition";
+    }
+  }
+
+  document.getElementById('langIdBtn').className = `text-xs px-2.5 py-1.5 rounded font-semibold transition ${currentLang === 'id' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-slate-200'}`;
+  document.getElementById('langEnBtn').className = `text-xs px-2.5 py-1.5 rounded font-semibold transition ${currentLang === 'en' ? 'bg-blue-600 text-white' : 'text-slate-400 hover:text-slate-200'}`;
+}
+
+// Print all 6 pages at once!
+function printAllPages() {
+  const data = allPeriods[currentPeriod] || defaultPeriods.juni_2026;
+  const metrics = calculate(data);
+  const printContainer = document.getElementById('allPagesPrintContainer');
+
+  let fullHtml = '';
+  for (let p = 1; p <= 6; p++) {
+    fullHtml += renderSlide(metrics, p, currentLang);
+  }
+  printContainer.innerHTML = fullHtml;
+
+  window.print();
+}
+
+function printCurrentPageOnly() {
+  const data = allPeriods[currentPeriod] || defaultPeriods.juni_2026;
+  const metrics = calculate(data);
+  const printContainer = document.getElementById('allPagesPrintContainer');
+  printContainer.innerHTML = renderSlide(metrics, currentPage, currentLang);
+  window.print();
+}
+
+function goToPage(pg) {
+  currentPage = pg;
+  updateView();
+}
+
+function prevPage() {
+  if (currentPage > 1) {
+    currentPage--;
+    updateView();
+  }
+}
+
+function nextPage() {
+  if (currentPage < 6) {
+    currentPage++;
+    updateView();
+  }
+}
+
+function setLanguage(lang) {
+  currentLang = lang;
+  updateView();
+}
+
+function switchPeriod(p) {
+  currentPeriod = p;
+  updateView();
+}
+
+function openUploadModal() {
+  renderPeriodSelectors();
+  document.getElementById('uploadModal').classList.remove('hidden');
+}
+
+function closeUploadModal() {
+  document.getElementById('uploadModal').classList.add('hidden');
+}
+
+async function handleLocalFile(file) {
+  if (!file) return;
+  const status = document.getElementById('localUploadStatus');
+  status.textContent = `Membaca: ${file.name}...`;
+
+  if (file.name.endsWith('.pdf')) {
+    status.textContent = `Mengirim ${file.name} ke AI Parser lokal (http://localhost:3000)...`;
+    try {
+      const arrayBuf = await file.arrayBuffer();
+      const res = await fetch('http://localhost:3000/api/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/octet-stream', 'x-file-name': encodeURIComponent(file.name) },
+        body: arrayBuf
+      });
+      const data = await res.json();
+      if (data.success && data.attendance && data.attendance.length) {
+        stagedUploadData = data.attendance;
+        if (data.period && data.period !== 'Periode Baru') {
+          document.getElementById('modalPeriodName').value = data.period;
+        }
+        status.textContent = `✓ ${file.name} berhasil dijabarkan AI! (${data.totalRecords} Pegawai auto-generated)`;
+        document.getElementById('localPreviewSummary').classList.remove('hidden');
+        document.getElementById('localPreviewCount').textContent = `${data.totalRecords} Pegawai (Dihasilkan Otomatis)`;
+        document.getElementById('modalLockBtn').disabled = false;
+        return;
+      }
+    } catch (e) {
+      status.textContent = `Untuk ekstraksi PDF otomatis via AI, pastikan server aktif di http://localhost:3000 atau gunakan dashboard web.`;
+      return;
+    }
+  }
+
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const content = e.target.result;
+      let attendance = [];
+      if (file.name.endsWith('.json')) {
+        const parsed = JSON.parse(content);
+        attendance = parsed.attendance || parsed;
+      } else {
+        const lines = content.split(/\r?\n/).filter(l => l.trim().length > 0);
+        for (let i = 1; i < lines.length; i++) {
+          const cols = lines[i].split(',');
+          if (cols.length < 2) continue;
+          const name = cols[1] ? cols[1].trim() : `Pegawai ${i}`;
+          const mntCurrent = parseFloat(cols[2]) || 0;
+          const mntLast = parseFloat(cols[3]) || 0;
+          const hariCurrent = parseFloat(cols[4]) || 0;
+          const hariLast = parseFloat(cols[5]) || 0;
+          attendance.push({
+            no: i,
+            name,
+            mntCurrent,
+            mntLast,
+            deltaMnt: mntLast - mntCurrent,
+            hariCurrent,
+            hariLast,
+            deltaHari: hariLast - hariCurrent,
+            izin: parseFloat(cols[6]) || 0,
+            sakit: parseFloat(cols[7]) || 0,
+            sakitTS: parseFloat(cols[8]) || 0,
+            alfa: parseFloat(cols[9]) || 0,
+            cuti: parseFloat(cols[10]) || 0,
+            wfh: parseFloat(cols[11]) || 0,
+            skor: parseFloat(cols[12]) || 100
+          });
+        }
+      }
+
+      if (attendance.length) {
+        stagedUploadData = attendance;
+        status.textContent = `✓ ${file.name} berhasil dibaca!`;
+        document.getElementById('localPreviewSummary').classList.remove('hidden');
+        document.getElementById('localPreviewCount').textContent = `${attendance.length} Pegawai`;
+        document.getElementById('modalLockBtn').disabled = false;
+      } else {
+        status.textContent = 'Gagal memproses baris data';
+      }
+    } catch (err) {
+      status.textContent = `Error membaca file: ${err.message}`;
+    }
+  };
+  reader.readAsText(file);
+}
+
+function saveLockedPeriodLocal() {
+  const pName = document.getElementById('modalPeriodName').value.trim();
+  if (!pName) {
+    alert('Nama periode baru wajib diisi!');
+    return;
+  }
+  const prevKey = document.getElementById('modalPrevPeriodSelect').value;
+  const prevPeriodData = prevKey ? allPeriods[prevKey] : null;
+  const pKey = pName.toLowerCase().replace(/[^a-z0-9]+/g, '_');
+
+  const processed = stagedUploadData.map((row, idx) => {
+    let mntLast = row.mntLast || 0;
+    let hariLast = row.hariLast || 0;
+
+    if (prevPeriodData && prevPeriodData.attendance && !row.mntLast) {
+      const match = prevPeriodData.attendance.find(p => p.name.trim().toLowerCase() === row.name.trim().toLowerCase());
+      if (match) {
+        mntLast = match.mntCurrent;
+        hariLast = match.hariCurrent;
+      }
+    }
+
+    return {
+      ...row,
+      no: idx + 1,
+      mntLast,
+      hariLast,
+      deltaMnt: mntLast - row.mntCurrent,
+      deltaHari: hariLast - row.hariCurrent
+    };
+  });
+
+  allPeriods[pKey] = {
+    id: pKey,
+    periode: pName,
+    isLocked: true,
+    bulanLaluName: prevPeriodData ? prevPeriodData.periode : "Bulan lalu",
+    totalPegawaiHeader: processed.length,
+    demographics: prevPeriodData ? prevPeriodData.demographics : defaultPeriods.juni_2026.demographics,
+    attendance: processed
+  };
+
+  currentPeriod = pKey;
+  renderPeriodSelectors();
+  closeUploadModal();
+  updateView();
+  alert(`Periode "${pName}" berhasil dikunci dan dimuat ke dalam laporan!`);
+}
+
+renderPeriodSelectors();
+updateView();
+  </script>
+</body>
+</html>
