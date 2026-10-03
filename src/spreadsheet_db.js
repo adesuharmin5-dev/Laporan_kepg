@@ -1,19 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const xlsx = require('xlsx');
+const { DATA_DIR, ensureDataDir } = require('./storage_path');
 
-const DATA_DIR = path.join(__dirname, '..', 'data');
 const DB_FILE = path.join(DATA_DIR, 'database_kepegawaian.xlsx');
 const PERIODS_INDEX_FILE = path.join(DATA_DIR, 'periods.json');
-
-/**
- * Ensures data directory exists
- */
-function ensureDataDir() {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
-}
 
 /**
  * Synchronizes all locked periods and attendance data into database_kepegawaian.xlsx

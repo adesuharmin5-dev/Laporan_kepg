@@ -11,7 +11,7 @@ const { checkConnection, listTabs, pullDataFromTab, pushPeriodToGoogleSheet, PRE
 
 const PORT = process.env.PORT || 3000;
 
-const server = http.createServer(async (req, res) => {
+async function handleRequest(req, res) {
   const parsedUrl = url.parse(req.url, true);
   const pathname = parsedUrl.pathname;
 
@@ -344,7 +344,7 @@ const server = http.createServer(async (req, res) => {
 
   res.writeHead(404, { 'Content-Type': 'text/plain' });
   res.end('404 Not Found');
-});
+}
 
 function extractFileFromMultipart(buffer, boundary) {
   const boundaryBuffer = Buffer.from('--' + boundary);
@@ -366,6 +366,8 @@ function extractFileFromMultipart(buffer, boundary) {
   return { buffer: buffer.slice(fileStart, nextBoundary - 2), filename };
 }
 
+const server = http.createServer(handleRequest);
+
 if (require.main === module) {
   server.listen(PORT, () => {
     console.log(`=======================================================`);
@@ -375,4 +377,5 @@ if (require.main === module) {
   });
 }
 
-module.exports = server;
+module.exports = handleRequest;
+module.exports.server = server;

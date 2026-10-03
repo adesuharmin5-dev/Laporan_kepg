@@ -2,14 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const { calculateMetrics } = require('./calculator');
 const { syncDatabaseToSpreadsheet, getDatabaseStats, loadDatabaseFromSpreadsheet } = require('./spreadsheet_db');
+const { DATA_DIR, ensureDataDir } = require('./storage_path');
 
-const DATA_DIR = path.join(__dirname, '..', 'data');
 const PERIODS_INDEX_FILE = path.join(DATA_DIR, 'periods.json');
 
 function initPeriodsIndex() {
-  if (!fs.existsSync(DATA_DIR)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true });
-  }
+  ensureDataDir();
 
   if (!fs.existsSync(PERIODS_INDEX_FILE)) {
     // Seed initial periods
